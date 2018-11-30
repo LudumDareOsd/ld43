@@ -5,10 +5,10 @@ import LoadScene from './scenes/LoadScene';
 const config:GameConfig = {
     type: Phaser.AUTO,
     parent: 'content',
-    width: 640,
-    height: 480,
+    width: 960,
+    height: 720,
     resolution: 1,
-    backgroundColor: "#EDEEC9",
+    backgroundColor: "#aaa",
     scene: [
       LoadScene
     ]
