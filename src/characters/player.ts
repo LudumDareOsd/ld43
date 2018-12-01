@@ -18,8 +18,12 @@ class Player {
   constructor(x: number, y: number, private scene: Phaser.Scene, private cursors: any) {
     this.sceneLcl = scene;
     this.sprite = this.scene.physics.add.sprite(x, y, 'player');
+    this.sprite.body.offset.x = 9;
+    this.sprite.body.setSize(14, 32);
     this.sprite.setScale(2);
     this.sprite.setDepth(5);
+    scene.anims.create({ key: 'run', frames: scene.anims.generateFrameNumbers('player', { start: 0, end: 5 }), frameRate: 6, repeat: 1});
+    scene.anims.create({ key: 'idle', frames: scene.anims.generateFrameNumbers('player', { start: 0, end: 0 }), frameRate: 6, repeat: 1});
     this.knifeManager = new BulletManager(this.scene, 'knife', 5, 500, { x: 12, y: 12, width: 10, height: 6 });
     this.pew = this.sceneLcl.sound.add('player_fire_knife', { loop: false });
     this.pew.volume = 0.4;
@@ -30,6 +34,12 @@ class Player {
   public update(time: number, delta: number) {
     this.knifeManager.update(delta);
 
+    if (Math.abs(this.sprite.body.velocity.x) > 0) {
+      this.sprite.anims.play('run', true);
+    } else {
+      this.sprite.anims.play('idle', true);
+    }
+
     if (this.jumpTimer > 0) {
       this.jumpTimer -= delta;
     }
@@ -37,10 +47,12 @@ class Player {
     if (this.cursors.left.isDown) {
       this.sprite.body.setVelocityX(-160);
       this.turnedRight = false;
+      this.sprite.flipX = true;
     }
     else if (this.cursors.right.isDown) {
       this.sprite.body.setVelocityX(160);
       this.turnedRight = true;
+      this.sprite.flipX = false;
     }
     else {
       this.sprite.body.setVelocityX(0);
@@ -48,7 +60,7 @@ class Player {
 
     if (this.cursors.up.isDown && this.sprite.body.onFloor()) {
       this.sprite.body.setVelocityY(-330);
-      this.jumpTimer = 400;
+      this.jumpTimer = 330;
       this.doublejump = true;
     }
 
