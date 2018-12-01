@@ -1,20 +1,19 @@
 class LoadScene extends Phaser.Scene {
-	constructor() {
+  constructor() {
     super({
-			key: 'LoadScene'
-		});
-	}
+      key: 'LoadScene'
+    });
+  }
 
-	preload() {
-		// this.load.tilemapTiledJSON('map', '/assets/tilemaps/desert.json');
-		// this.load.image('Desert', '/assets/tilemaps/tmw_desert_spacing.png');
-	}
+  preload() {
 
-	create() {
-	}
+  }
 
-	update(time: number, delta:number) {
-	}
+  create() {
+  }
+
+  update(time: number, delta:number) {
+  }
 }
 
 export default LoadScene;
