@@ -27,7 +27,7 @@ class GameScene extends Phaser.Scene {
 
   private initPlayer() {
     const cursors = this.input.keyboard.createCursorKeys();
-    this.player = new Player(this, 100, 100, cursors);
+    this.player = new Player(this, 200, 640, cursors);
     this.physics.add.existing(this.player);
   }
 
