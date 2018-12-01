@@ -16,10 +16,9 @@ class GameScene extends Phaser.Scene {
 
   create() {
     this.initPlayer();
-    this.map.create();
     this.enemyHandler.create();
+    this.map.create();
     this.initPhysics();
-    this.enemyHandler.add(100, 100, 0);
   }
 
   update(time: number, delta: number) {
