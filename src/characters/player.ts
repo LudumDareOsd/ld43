@@ -9,12 +9,22 @@ class Player {
   private turnedRight = true;
   private doublejump = true;
   private jumpTimer = 0;
+  private sceneLcl: Phaser.Scene;
+
+  pew: any;
+  knifehitwall: any;
+  haveFired: boolean = false;
 
   constructor(x: number, y: number, private scene: Phaser.Scene, private cursors: any) {
+    this.sceneLcl = scene;
     this.sprite = this.scene.physics.add.sprite(x, y, 'player');
     this.sprite.setScale(2);
     this.sprite.setDepth(5);
     this.knifeManager = new BulletManager(this.scene, 'knife', 5, 500, { x: 12, y: 12, width: 10, height: 6 });
+    this.pew = this.sceneLcl.sound.add('player_fire_knife', { loop: false });
+    this.pew.volume = 0.4;
+    //this.knifehitwall = this.sceneLcl.sound.add('knife_hit', { loop: false });
+    //this.knifehitwall.volume = 0.3;
   }
 
   public update(time: number, delta: number) {
@@ -47,12 +57,22 @@ class Player {
       this.doublejump = false;
     }
 
-    if (this.space.isDown) {
+    if (this.space.isDown && !this.haveFired) {
+
+      this.haveFired = true;
+      let nbrBulletsLeft = 0;
+
       if (this.turnedRight) {
-        this.knifeManager.fire(this.sprite.x + 10, this.sprite.y - 6, this.turnedRight);
+        nbrBulletsLeft = this.knifeManager.fire(this.sprite.x + 10, this.sprite.y - 6, this.turnedRight);
       } else {
-        this.knifeManager.fire(this.sprite.x - 10, this.sprite.y - 6, this.turnedRight);
+        nbrBulletsLeft = this.knifeManager.fire(this.sprite.x - 10, this.sprite.y - 6, this.turnedRight);
       }
+
+      if(nbrBulletsLeft > 0)
+        this.pew.play();
+
+    } else if(!this.space.isDown){
+      this.haveFired = false;
     }
   }
 
@@ -60,6 +80,8 @@ class Player {
     knife.setVelocityX(0);
     knife.setVelocityY(0);
     knife.setAccelerationY(300);
+    //let duns = knife.scene.sound.add('knife_hit', { loop: false });
+    //duns.play();
   }
 
 }
