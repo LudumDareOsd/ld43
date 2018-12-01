@@ -43,7 +43,7 @@ class MapHandler {
         const x = tile.x * 32;
         const y = tile.y * 32;
         // console.log(x, y);
-        const rect = this.sceneRef.add.zone(x+16, y, 26, 10);
+        const rect = this.sceneRef.add.zone(x+3, y-2, 26, 10);
         this.deadlyGroup.add(rect);
       }
 
