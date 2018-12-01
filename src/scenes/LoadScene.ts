@@ -7,7 +7,9 @@ class LoadScene extends Phaser.Scene {
 
   preload() {
     this.load.image('background_title', 'assets/gfx/title_screen.png');
-    this.load.image('startguld', 'assets/gfx/startguld.png');
+    this.load.image('background_win', 'assets/gfx/win_screen.png');
+    this.load.image('background_gameover', 'assets/gfx/gameover_screen.png');
+
 		this.load.image('knife', '/assets/gfx/knife.png');
 
     this.load.image('tilemap01', '/assets/gfx/tilemap01.png');
@@ -16,8 +18,9 @@ class LoadScene extends Phaser.Scene {
 
 		(this.load as any).spritesheet('player', '/assets/gfx/player.png', { frameWidth: 16, frameHeight: 32 });
 
-
     this.load.audio('titleaudio', 'assets/sfx/ambient_deep_bass.mp3', null);
+    this.load.audio('gameoveraudio', 'assets/sfx/ambient_violin_scary.mp3', null);
+    this.load.audio('winaudio', 'assets/sfx/ambient_deep_bass.mp3', null);
     this.load.audio('knife_hit', 'assets/sfx/knife_hit.mp3', null);
     this.load.audio('player_death', 'assets/sfx/player_death.mp3', null);
     this.load.audio('player_fire_knife', 'assets/sfx/player_fire_knife.mp3', null);
@@ -34,7 +37,8 @@ class LoadScene extends Phaser.Scene {
   }
 
 	update(time: number, delta: number) {
-		this.scene.start('StartScene');
+    this.scene.start('GameScene');
+    //this.scene.start('StartScene');
 	}
 }
 
