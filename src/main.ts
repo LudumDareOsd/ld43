@@ -16,11 +16,11 @@ const config:GameConfig = {
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { y: 900 },
+      gravity: { y: 700 },
       debug: true
     }
   },
-    scene: [
+  scene: [
     LoadScene,
     StartScene,
     GameScene

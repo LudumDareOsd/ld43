@@ -6,7 +6,7 @@ class LoadScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('tilemap', '/assets/gfx/tilemap01.png');
+    this.load.image('tilemap01', '/assets/gfx/tilemap01.png');
     this.load.tilemapTiledJSON('map', '/assets/maps/map1.json');
   }
 

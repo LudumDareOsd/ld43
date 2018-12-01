@@ -9,7 +9,7 @@ class Player extends Phaser.GameObjects.Sprite {
     maxSize: 50,
     runChildUpdate: true
   });
-  private turnedRight = true; 
+  private turnedRight = true;
 
   constructor(scene: Phaser.Scene, x: number, y: number, private cursors: any) {
     super(scene, x, y, '');
@@ -27,7 +27,7 @@ class Player extends Phaser.GameObjects.Sprite {
       this._.body.setVelocityX(0);
     }
 
-    if (this.cursors.up.isDown && this._.body.touching.down) {
+    if (this.cursors.up.isDown && this._.body.onFloor()) {
       this._.body.setVelocityY(-330);
     }
 
