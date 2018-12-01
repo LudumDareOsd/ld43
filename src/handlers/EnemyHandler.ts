@@ -2,13 +2,16 @@ import Priest from "../characters/priest";
 
 class EnemyHandler {
 
-  public enemys: Phaser.GameObjects.Group;
+  public enemyGroup: Phaser.GameObjects.Group;
+  public enemys = [];
+  public colliderGroup: Phaser.GameObjects.Group;
 
   constructor(private scene: Phaser.Scene) {
   }
 
   public create() {
-    this.enemys = this.scene.physics.add.group();
+    this.enemyGroup = this.scene.physics.add.group();
+    this.colliderGroup = this.scene.add.group([], {});
   }
 
   public add(x, y, type: number) {
@@ -25,7 +28,20 @@ class EnemyHandler {
       }
     }
 
-    this.enemys.add(enemy.sprite);
+    this.enemyGroup.add(enemy.sprite);
+    this.enemys.push(enemy);
+    this.colliderGroup.add(enemy.collider)
+  }
+
+  public update(time, delta) {
+    for(let enemy of this.enemys) {
+      enemy.update(time, delta);
+    }
+  }
+
+  
+  public onTurn(enemy, tile) {
+    console.log(enemy);
   }
 }
 

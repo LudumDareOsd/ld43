@@ -1,8 +1,10 @@
 abstract class Enemy {
   public sprite;
+  public collider;
 
-  constructor(x: number, y: number, texture: string, private scene: Phaser.Scene, ) {
+  constructor(protected x: number, protected y: number, texture: string, private scene: Phaser.Scene, ) {
     this.sprite = this.scene.physics.add.sprite(x, y, texture);
+
     this.sprite.setScale(2);
     this.sprite.setDepth(5);
   }

@@ -24,6 +24,7 @@ class GameScene extends Phaser.Scene {
 
   update(time: number, delta: number) {
     this.player.update(time, delta);
+    this.enemyHandler.update(time, delta);
   }
 
   private initPlayer() {
