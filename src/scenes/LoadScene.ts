@@ -14,6 +14,7 @@ class LoadScene extends Phaser.Scene {
 	}
 
 	update(time: number, delta:number) {
+		this.scene.start('StartScene');
 	}
 }
 

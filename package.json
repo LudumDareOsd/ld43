@@ -1,8 +1,7 @@
 {
-  "name": "phaser3-typescript-webpack",
+  "name": "ld43",
   "version": "1.0.0",
   "description": "",
-  "author": "troyedwardsjr",
   "main": "index.js",
   "scripts": {
     "start": "webpack",
