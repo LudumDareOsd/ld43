@@ -1,4 +1,5 @@
 import Player from '../characters/player';
+import MapHandler from '../handlers/MapHandler';
 
 class GameScene extends Phaser.Scene {
   constructor() {
@@ -8,12 +9,11 @@ class GameScene extends Phaser.Scene {
   }
 
   private player;
-  private map;
-  private tileLayer;
+  private map: MapHandler = new MapHandler({scene: this});
 
   create() {
     this.initPlayer();
-    this.initMap();
+    this.map.create();
     this.initPhysics();
   }
 
@@ -26,19 +26,8 @@ class GameScene extends Phaser.Scene {
     this.player = new Player(100, 100, this, cursors);
   }
 
-  private initMap() {
-    this.map = this.make.tilemap({key: 'map'});
-    const tiles = this.map.addTilesetImage('tilemap01', 'tilemap');
-    this.tileLayer = this.map.createStaticLayer(0, tiles, 0, 0).setScale(2);
-
-    this.tileLayer.setCollisionByExclusion([-1]);
-
-    this.physics.world.bounds.width = this.tileLayer.width;
-    this.physics.world.bounds.height = this.tileLayer.height;
-  }
-
   private initPhysics() {
-    this.physics.add.collider(this.tileLayer, this.player.sprite, null, null, null);
+    this.map.init();
   }
 }
 
