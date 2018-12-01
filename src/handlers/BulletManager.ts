@@ -28,6 +28,8 @@ class BulletManager {
 
   public fire(x: number, y: number, right: boolean) {
 
+    let nbrBulletsLeft = (this.bullets.maxSize - this.bullets.children.entries.length);
+
     if (this.firecd <= 0) {
       const bullet = this.bullets.get();
 
@@ -57,6 +59,8 @@ class BulletManager {
         this.firecd = this.cd;
       }
     }
+
+    return nbrBulletsLeft;
   }
 }
 

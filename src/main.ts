@@ -3,6 +3,8 @@ import 'phaser';
 import LoadScene from './scenes/LoadScene';
 import StartScene from './scenes/StartScene';
 import GameScene from './scenes/GameScene';
+import GameOverScene from './scenes/GameOverScene';
+import WinScene from './scenes/WinScene';
 import Player from './characters/player';
 import Enemy from './characters/enemy';
 import Priest from './characters/priest';
@@ -28,7 +30,9 @@ const config:GameConfig = {
   scene: [
     LoadScene,
     StartScene,
-    GameScene
+    GameScene,
+    GameOverScene,
+    WinScene
   ]
 };
 

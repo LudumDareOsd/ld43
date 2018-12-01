@@ -1,22 +1,22 @@
-class StartScene extends Phaser.Scene {
+class GameOverScene extends Phaser.Scene {
 
 	private music : any;
 
 	constructor() {
 		super({
-				key: 'StartScene'
+				key: 'GameOverScene'
 			});
 	}
 
 	preload() {
-		this.music = this.sound.add('titleaudio', { loop: true });
+		this.music = this.sound.add('gameoveraudio', { loop: true });
 	}
 
 	create() {
-		this.add.image(0, 0, 'background_title').setOrigin(0, 0);
+		this.add.image(0, 0, 'background_gameover').setOrigin(0, 0);
 		this.music.play('', 0, 1, true);
 
-		this.add.zone(450, 200, 568, 63).setName('StartGame').setInteractive();
+		this.add.zone(500, 250, 568, 63).setName('StartGame').setInteractive();
 
 		this.input.on('gameobjectdown', (pointer, gameObject) => {
             if(gameObject.name == 'StartGame') {
@@ -36,9 +36,8 @@ class StartScene extends Phaser.Scene {
 	}
 
 	update(time: number, delta:number) {
-		//this.music.stop();
-    	//this.scene.start('GameScene');
+
 	}
 }
 
-export default StartScene;
+export default GameOverScene;
