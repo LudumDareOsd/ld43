@@ -1,11 +1,11 @@
-import Knife from "./objects/knife";
+import BulletManager from "../handlers/BulletManager";
 
 class Player {
 
   public sprite;
+  public knifeManager: BulletManager;
   private _ = this as any;
   private space = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-  private knifes;
   private turnedRight = true;
   private doublejump = true;
   private jumpTimer = 0;
@@ -13,14 +13,13 @@ class Player {
   constructor(x: number, y: number, private scene: Phaser.Scene, private cursors: any) {
     this.sprite = this.scene.physics.add.sprite(x, y, 'player');
     this.sprite.setScale(2);
-    this.knifes = this.sprite.scene.physics.add.group([{
-      classType: Knife,
-      maxSize: 50,
-      runChildUpdate: true
-    }]);
+    this.sprite.setDepth(5);
+    this.knifeManager = new BulletManager(this.scene, 'knife', 5, 500, { x: 12, y: 12, width: 10, height: 6 });
   }
 
   public update(time: number, delta: number) {
+    this.knifeManager.update(delta);
+
     if (this.jumpTimer > 0) {
       this.jumpTimer -= delta;
     }
@@ -49,17 +48,19 @@ class Player {
     }
 
     if (this.space.isDown) {
-      this.fire();
+      if (this.turnedRight) {
+        this.knifeManager.fire(this.sprite.x + 10, this.sprite.y - 6, this.turnedRight);
+      } else {
+        this.knifeManager.fire(this.sprite.x - 10, this.sprite.y - 6, this.turnedRight);
+      }
     }
   }
 
-  private fire() {
-    let knife = this.knifes.get();
-
-    if (knife) {
-      knife.fire(this.sprite.x, this.sprite.y, this.turnedRight);
-    }
+  public stopKnife(knife, tile) {
+    knife.setVelocityX(0);
+    knife.setAcceleration(300);
   }
+
 }
 
 export default Player;

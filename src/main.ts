@@ -4,15 +4,15 @@ import LoadScene from './scenes/LoadScene';
 import StartScene from './scenes/StartScene';
 import GameScene from './scenes/GameScene';
 import Player from './characters/player';
-import Knife from './characters/objects/knife';
 import BulletManager from './handlers/BulletManager';
 
 const config:GameConfig = {
   type: Phaser.AUTO,
   parent: 'content',
   width: 960,
-  height: 704,
+  height: 720,
   resolution: 1,
+  pixelArt: true,
   backgroundColor: "#aaa",
   physics: {
     default: 'arcade',
