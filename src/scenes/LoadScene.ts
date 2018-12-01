@@ -12,7 +12,7 @@ class LoadScene extends Phaser.Scene {
 
     this.load.image('tilemap01', '/assets/gfx/tilemap01.png');
     this.load.image('background-tiles', '/assets/gfx/background-tiles.png');
-    this.load.tilemapTiledJSON('map', '/assets/maps/map1.json');
+    this.load.tilemapTiledJSON('map1', '/assets/maps/map1.json');
 
 		(this.load as any).spritesheet('player', '/assets/gfx/player.png', { frameWidth: 16, frameHeight: 32 });
 

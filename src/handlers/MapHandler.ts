@@ -2,29 +2,37 @@ class MapHandler {
 
   private sceneRef;
   private map;
+  private currentMap:number = 1;
+
+  private tiles;
+  private bgtiles;
+
   private tileLayer;
   private deadlyGroup;
   private backgroundLayer;
+
+  private spawnpoint;
 
   constructor({ scene: scene }) {
     this.sceneRef = scene;
   }
 
   create() {
-    this.map = this.sceneRef.make.tilemap({ key: 'map' });
-    const tiles = this.map.addTilesetImage('tilemap01', 'tilemap01');
-    const bgtiles = this.map.addTilesetImage('background-tiles', 'background-tiles');
+    this.map = this.sceneRef.make.tilemap({ key: 'map1' });
+    this.tiles = this.map.addTilesetImage('tilemap01', 'tilemap01');
+    this.bgtiles = this.map.addTilesetImage('background-tiles', 'background-tiles');
+    this.spawnpoint = this.findObjectsByType('SpawnPoint', 0)[0];
+    console.log('new spawnpoint', this.spawnpoint);
+
+
     this.deadlyGroup = this.sceneRef.physics.add.staticGroup();
-    this.backgroundLayer = this.map.createStaticLayer('Background', bgtiles, 0, 0).setScale(2);
-    this.tileLayer = this.map.createStaticLayer('Tiles', tiles, 0, 0).setScale(2);
-    // this.deadlyLayer = this.map.createStaticLayer('Deadly', tiles, 0, 0);
+    this.backgroundLayer = this.map.createStaticLayer('Background', this.bgtiles, 0, 0).setScale(2);
+    this.tileLayer = this.map.createStaticLayer('Tiles', this.tiles, 0, 0).setScale(2);
 
-
-    let asd = this.map.createFromObjects('Enemies', null);
-    // console.log(asd);
-    // asd.foreach((tile) => {
-    //   console.log(tile);
-    // });
+    let priests = this.findObjectsByType('Priest', 0);
+    let popehats = this.findObjectsByType('PopeHat', 0);
+    console.log(priests);
+    console.log(popehats);
 
 
     this.tileLayer.forEachTile((tile) => {
@@ -41,6 +49,7 @@ class MapHandler {
 
     this.tileLayer.setCollisionByExclusion([-1]);
     // map.setCollisionBetween(1, 999, true, 'collisionLayer');
+
   }
 
   init() {
@@ -49,9 +58,9 @@ class MapHandler {
     this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.player.knifeManager.bullets, this.sceneRef.player.stopKnife, null);
   }
 
-  loadMap(mapName: string) {
-    this.sceneRef.load.tilemapTiledJSON('map', '/assets/maps/'+mapName);
-    console.log('loading map', mapName);
+  nextMap() {
+
+
   }
 
   playerDeadlyCollide(player, object) {
@@ -62,6 +71,19 @@ class MapHandler {
     player.body.setVelocityX(0);
     player.body.setVelocityY(0);
     // player.anims.play('hurt');
+  }
+
+  //find objects in a Tiled layer that containt a property called "type" equal to a certain value
+  findObjectsByType(type, layer) {
+    let result = new Array();
+    this.map.objects[layer].objects.forEach(function(element) {
+      // console.log(element);
+      if(element.type === type) {
+        // element.y -= this.map.tileHeight;
+        result.push(element);
+      }
+    });
+    return result;
   }
 
 }
