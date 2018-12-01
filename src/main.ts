@@ -4,7 +4,7 @@ import LoadScene from './scenes/LoadScene';
 import StartScene from './scenes/StartScene';
 import GameScene from './scenes/GameScene';
 import Player from './characters/player';
-import Knife from './characters/objects/knife';
+import BulletManager from './handlers/BulletManager';
 
 const config:GameConfig = {
   type: Phaser.AUTO,

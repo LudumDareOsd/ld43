@@ -1,17 +1,21 @@
 class LoadScene extends Phaser.Scene {
-  constructor() {
-    super({
-      key: 'LoadScene'
-    });
-  }
+	constructor() {
+		super({
+			key: 'LoadScene'
+		});
+	}
 
   preload() {
     this.load.image('background_title', 'assets/gfx/title_screen.png');
     this.load.image('startguld', 'assets/gfx/startguld.png');
+		this.load.image('knife', '/assets/gfx/knife.png');
 
     this.load.image('tilemap01', '/assets/gfx/tilemap01.png');
     this.load.image('background-tiles', '/assets/gfx/background-tiles.png');
-    this.load.tilemapTiledJSON('map', '/assets/maps/test.json');
+    this.load.tilemapTiledJSON('map', '/assets/maps/map1.json');
+
+		(this.load as any).spritesheet('player', '/assets/gfx/player.png', { frameWidth: 16, frameHeight: 32 });
+
 
     this.load.audio('titleaudio', 'assets/sfx/ambient_deep_bass.mp3', null);
     this.load.audio('knife_hit', 'assets/sfx/knife_hit.mp3', null);
@@ -29,7 +33,7 @@ class LoadScene extends Phaser.Scene {
     this.load.audio('priest_fire', 'assets/sfx/priest_fire.mp3', null);
   }
 
-	update(time: number, delta:number) {
+	update(time: number, delta: number) {
 		this.scene.start('StartScene');
 	}
 }

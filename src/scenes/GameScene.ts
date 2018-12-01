@@ -11,10 +11,6 @@ class GameScene extends Phaser.Scene {
   private player;
   private map: MapHandler = new MapHandler({scene: this});
 
-  preload() {
-
-  }
-
   create() {
     this.initPlayer();
     this.map.create();
@@ -27,12 +23,10 @@ class GameScene extends Phaser.Scene {
 
   private initPlayer() {
     const cursors = this.input.keyboard.createCursorKeys();
-    this.player = new Player(this, 200, 640, cursors);
-    this.physics.add.existing(this.player);
+    this.player = new Player(100, 100, this, cursors);
   }
 
   private initPhysics() {
-    // this.player.setCollideWorldBounds(true);
     this.map.init();
   }
 }

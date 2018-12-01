@@ -14,7 +14,8 @@ class StartScene extends Phaser.Scene {
 
 	create() {
 		this.add.image(0, 0, 'background_title').setOrigin(0, 0);
-		let start = this.add.sprite(448, 583, 'startguld').setOrigin(0, 0); start.alpha = 0;
+    let start = this.add.sprite(448, 583, 'startguld').setOrigin(0, 0) as any;
+    start.alpha = 0;
 		this.music.play('', 0, 1, true);
 
 		this.add.zone(500, 280, 800, 100).setName('StartGame').setInteractive();

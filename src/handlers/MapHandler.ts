@@ -6,12 +6,12 @@ class MapHandler {
   private deadlyGroup;
   private backgroundLayer;
 
-  constructor({scene: scene}) {
+  constructor({ scene: scene }) {
     this.sceneRef = scene;
   }
 
   create() {
-    this.map = this.sceneRef.make.tilemap({key: 'map'});
+    this.map = this.sceneRef.make.tilemap({ key: 'map' });
     const tiles = this.map.addTilesetImage('tilemap01', 'tilemap01');
     const bgtiles = this.map.addTilesetImage('background-tiles', 'background-tiles');
     this.deadlyGroup = this.sceneRef.physics.add.staticGroup();
@@ -19,9 +19,17 @@ class MapHandler {
     this.tileLayer = this.map.createStaticLayer('Tiles', tiles, 0, 0).setScale(2);
     // this.deadlyLayer = this.map.createStaticLayer('Deadly', tiles, 0, 0);
 
+
+    let asd = this.map.createFromObjects('Enemies', null);
+    // console.log(asd);
+    // asd.foreach((tile) => {
+    //   console.log(tile);
+    // });
+
+
     this.tileLayer.forEachTile((tile) => {
-      // console.log(e);
-      if (tile.index === 2) {
+      // console.log(tile);
+      if (tile.index === 66) {
         const x = tile.getCenterX();
         const y = tile.getCenterY();
         // console.log(x, y);
@@ -36,10 +44,14 @@ class MapHandler {
   }
 
   init() {
-    this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.player, null, null, null);
-    this.sceneRef.physics.add.collider(this.deadlyGroup, this.sceneRef.player, this.playerDeadlyCollide, null, null);
-    this.sceneRef.physics.world.bounds.width = this.tileLayer.width;
-    this.sceneRef.physics.world.bounds.height = this.tileLayer.height;
+    this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.player.sprite, null, null, null);
+    this.sceneRef.physics.add.collider(this.deadlyGroup, this.sceneRef.player.sprite, this.playerDeadlyCollide, null, null);
+    this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.player.knifeManager.bullets, this.sceneRef.player.stopKnife, null);
+  }
+
+  loadMap(mapName: string) {
+    this.sceneRef.load.tilemapTiledJSON('map', '/assets/maps/'+mapName);
+    console.log('loading map', mapName);
   }
 
   playerDeadlyCollide(player, object) {
