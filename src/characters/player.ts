@@ -58,7 +58,8 @@ class Player {
 
   public stopKnife(knife, tile) {
     knife.setVelocityX(0);
-    knife.setAcceleration(300);
+    knife.setVelocityY(0);
+    knife.setAccelerationY(300);
   }
 
 }

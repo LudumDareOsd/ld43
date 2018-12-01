@@ -38,6 +38,8 @@ class BulletManager {
         bullet.setTexture(this.texture);
         bullet.body.setAllowGravity(false);
         bullet.setScale(2);
+        bullet.setBounceX(0);
+        bullet.setBounceY(0);
 
         if (right) {
           bullet.setVelocityX(400);
