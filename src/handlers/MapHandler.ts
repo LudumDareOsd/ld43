@@ -14,10 +14,9 @@ class MapHandler {
     this.map = this.sceneRef.make.tilemap({key: 'map'});
     const tiles = this.map.addTilesetImage('tilemap01', 'tilemap01');
     const bgtiles = this.map.addTilesetImage('background-tiles', 'background-tiles');
+    this.backgroundLayer = this.map.createStaticLayer('Background', bgtiles, 0, 0).setScale(2);
     this.tileLayer = this.map.createStaticLayer('Tiles', tiles, 0, 0).setScale(2);
     this.deadlyLayer = this.map.createStaticLayer('Deadly', tiles, 0, 0).setScale(2);
-    this.backgroundLayer = this.map.createStaticLayer('Background', bgtiles, 0, 0).setScale(2);
-    // const belowLayer = this.map.createStaticLayer('Below Player', tileset, 0, 0);
     // this.deadlyGroup = this.sceneRef.physics.add.group();
 
     this.tileLayer.setCollisionByExclusion([-1]);

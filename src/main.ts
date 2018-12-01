@@ -10,8 +10,9 @@ const config:GameConfig = {
   type: Phaser.AUTO,
   parent: 'content',
   width: 960,
-  height: 704,
+  height: 720,
   resolution: 1,
+  pixelArt: true,
   backgroundColor: "#aaa",
   physics: {
     default: 'arcade',
