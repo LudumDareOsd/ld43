@@ -11,7 +11,7 @@ class MapHandler {
   private deadlyGroup;
   private backgroundLayer;
 
-  private spawnpoint;
+  private spawnpoint = {x: 100, y: 100};
 
   constructor({ scene: scene }) {
     this.sceneRef = scene;
@@ -21,27 +21,29 @@ class MapHandler {
     this.map = this.sceneRef.make.tilemap({ key: 'map1' });
     this.tiles = this.map.addTilesetImage('tilemap01', 'tilemap01');
     this.bgtiles = this.map.addTilesetImage('background-tiles', 'background-tiles');
-    this.spawnpoint = this.findObjectsByType('SpawnPoint', 0)[0];
-    console.log('new spawnpoint', this.spawnpoint);
-
+    this.reload();
 
     this.deadlyGroup = this.sceneRef.physics.add.staticGroup();
     this.backgroundLayer = this.map.createStaticLayer('Background', this.bgtiles, 0, 0).setScale(2);
     this.tileLayer = this.map.createStaticLayer('Tiles', this.tiles, 0, 0).setScale(2);
 
-    let priests = this.findObjectsByType('Priest', 0);
-    let popehats = this.findObjectsByType('PopeHat', 0);
-    console.log(priests);
-    console.log(popehats);
+    this.findObjectsByType('Priest', 0).forEach((element) => {
+      this.sceneRef.enemyHandler.add(element.x*2, element.y*2, 0);
+    });
+    this.findObjectsByType('PopeHat', 0).forEach((element) => {
+      // this.sceneRef.enemyHandler.add(element.x, element.y, 1);
+    });
 
 
     this.tileLayer.forEachTile((tile) => {
-      // console.log(tile);
       if (tile.index === 66) {
-        const x = tile.getCenterX();
-        const y = tile.getCenterY();
+        // console.log(tile);
+        // const x = tile.getCenterX();
+        // const y = tile.getCenterY();
+        const x = tile.x * 32;
+        const y = tile.y * 32;
         // console.log(x, y);
-        const rect = this.sceneRef.add.zone(x+8, y-6, 26, 10);
+        const rect = this.sceneRef.add.zone(x+16, y, 26, 10);
         this.deadlyGroup.add(rect);
       }
 
@@ -54,27 +56,33 @@ class MapHandler {
 
   init() {
     this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.player.sprite, null, null, null);
-    this.sceneRef.physics.add.collider(this.deadlyGroup, this.sceneRef.player.sprite, this.playerDeadlyCollide, null, null);
+    this.sceneRef.physics.add.collider(this.deadlyGroup, this.sceneRef.player.sprite, this.playerDeadlyCollide.bind(this), null, null);
     this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.player.knifeManager.bullets, this.sceneRef.player.stopKnife, null);
     this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.enemyHandler.enemys, null, null);
   }
 
-  nextMap() {
+  reload() {
+    const sp = this.findObjectsByType('SpawnPoint', 0)[0];
+    this.spawnpoint.x = sp.x*2; this.spawnpoint.y = sp.y*2;
+    console.log('setting player to spawnpoint: ', this.spawnpoint);
+    this.sceneRef.player.sprite.setX(this.spawnpoint.x);
+    this.sceneRef.player.sprite.setY(this.spawnpoint.y);
+  }
 
+  nextMap() {
 
   }
 
   playerDeadlyCollide(player, object) {
     // console.trace('playerDeadlyCollide');
     console.log('playerDeadlyCollide', player, object);
-    player.body.x = 100;
-    player.body.y = 100;
+    this.reload();
     player.body.setVelocityX(0);
     player.body.setVelocityY(0);
     // player.anims.play('hurt');
   }
 
-  //find objects in a Tiled layer that containt a property called "type" equal to a certain value
+  // find objects in a Tiled objectlayer of a "type"
   findObjectsByType(type, layer) {
     let result = new Array();
     this.map.objects[layer].objects.forEach(function(element) {
