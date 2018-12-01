@@ -6,11 +6,11 @@ import GameScene from './scenes/GameScene';
 import Player from './characters/player';
 import Knife from './characters/objects/knife';
 
-const config: GameConfig = {
+const config:GameConfig = {
   type: Phaser.AUTO,
   parent: 'content',
   width: 960,
-  height: 720,
+  height: 704,
   resolution: 1,
   backgroundColor: "#aaa",
   physics: {
