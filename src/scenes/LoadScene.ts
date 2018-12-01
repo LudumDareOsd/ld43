@@ -15,7 +15,7 @@ class LoadScene extends Phaser.Scene {
     this.load.tilemapTiledJSON('map', '/assets/maps/test.json');
 
 		(this.load as any).spritesheet('player', '/assets/gfx/player.png', { frameWidth: 16, frameHeight: 32 });
-
+		(this.load as any).spritesheet('priest', '/assets/gfx/priest.png', { frameWidth: 16, frameHeight: 32 });
 
     this.load.audio('titleaudio', 'assets/sfx/ambient_deep_bass.mp3', null);
     this.load.audio('knife_hit', 'assets/sfx/knife_hit.mp3', null);

@@ -29,6 +29,7 @@ class MapHandler {
     this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.player.sprite, null, null, null);
     this.sceneRef.physics.add.collider(this.deadlyLayer, this.sceneRef.player.sprite, this.playerDeadlyCollide, null, null);
     this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.player.knifeManager.bullets, this.sceneRef.player.stopKnife, null);
+    this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.enemyHandler.enemys, null, null);
   }
 
   playerDeadlyCollide(player, tile) {
