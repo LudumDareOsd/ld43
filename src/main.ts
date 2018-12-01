@@ -6,7 +6,11 @@ import GameScene from './scenes/GameScene';
 import GameOverScene from './scenes/GameOverScene';
 import WinScene from './scenes/WinScene';
 import Player from './characters/player';
+import Enemy from './characters/enemy';
+import Priest from './characters/priest';
 import BulletManager from './handlers/BulletManager';
+import EnemyManager from './handlers/EnemyHandler';
+
 
 const config:GameConfig = {
   type: Phaser.AUTO,

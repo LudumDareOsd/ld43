@@ -14,9 +14,10 @@ class LoadScene extends Phaser.Scene {
 
     this.load.image('tilemap01', '/assets/gfx/tilemap01.png');
     this.load.image('background-tiles', '/assets/gfx/background-tiles.png');
-    this.load.tilemapTiledJSON('map', '/assets/maps/test.json');
+    this.load.tilemapTiledJSON('map', '/assets/maps/map1.json');
 
 		(this.load as any).spritesheet('player', '/assets/gfx/player.png', { frameWidth: 16, frameHeight: 32 });
+		(this.load as any).spritesheet('priest', '/assets/gfx/priest.png', { frameWidth: 16, frameHeight: 32 });
 
     this.load.audio('titleaudio', 'assets/sfx/ambient_deep_bass.mp3', null);
     this.load.audio('gameoveraudio', 'assets/sfx/ambient_violin_scary.mp3', null);
