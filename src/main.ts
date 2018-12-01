@@ -4,6 +4,7 @@ import LoadScene from './scenes/LoadScene';
 import StartScene from './scenes/StartScene';
 import GameScene from './scenes/GameScene';
 import Player from './characters/player';
+import Knife from './characters/objects/knife';
 
 const config: GameConfig = {
   type: Phaser.AUTO,
@@ -15,7 +16,7 @@ const config: GameConfig = {
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { y: 300 },
+      gravity: { y: 900 },
       debug: true
     }
   },

@@ -20,10 +20,12 @@ class GameScene extends Phaser.Scene {
   }
 
   update(time: number, delta: number) {
+    this.player.update(time, delta);
   }
 
   private initPlayer() {
-    this.player = new Player(this, 100, 100);
+    const cursors = this.input.keyboard.createCursorKeys();
+    this.player = new Player(this, 100, 100, cursors);
     this.physics.add.existing(this.player);
   }
 
