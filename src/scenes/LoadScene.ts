@@ -9,11 +9,9 @@ class LoadScene extends Phaser.Scene {
 
   }
 
-  create() {
-  }
-
-  update(time: number, delta:number) {
-  }
+	update(time: number, delta:number) {
+		this.scene.start('StartScene');
+	}
 }
 
 export default LoadScene;
