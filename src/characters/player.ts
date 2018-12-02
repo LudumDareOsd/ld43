@@ -18,6 +18,7 @@ class Player {
   pew: any;
   knifehitwall: any;
   haveFired: boolean = false;
+  jumpsound : any;
 
   constructor(x: number, y: number, private scene: Phaser.Scene, private cursors: any) {
     this.sceneLcl = scene;
@@ -35,14 +36,16 @@ class Player {
     this.knifeManager = new BulletManager(this.scene, 'knife', 5, 500, { x: 12, y: 12, width: 10, height: 6 });
     this.pew = this.sceneLcl.sound.add('player_fire_knife', { loop: false });
     this.pew.volume = 0.4;
+    this.jumpsound = this.sceneLcl.sound.add('player_jump', { loop: false, volume: 0.3 });
+    this.jumpsound.volume = 0.3;
     //this.knifehitwall = this.sceneLcl.sound.add('knife_hit', { loop: false });
     //this.knifehitwall.volume = 0.3;
     this.sprite.on('animationcomplete', (e) => {
       if (e.key === 'jump') {
-        // console.log(e);
         this.sprite.body.setVelocityY(-330);
         this.jumpTimer = 330;
         this.doublejump = true;
+        this.jumpsound.play();
       }
     }, scene);
   }
@@ -78,6 +81,7 @@ class Player {
     }
 
     if (this.cursors.up.isDown && this.sprite.body.onFloor()) {
+      // animationcomplete will trigger the actual jump
       this.sprite.anims.play('jump', true);
       this.animTimers.jump = 100;
     }
@@ -85,6 +89,7 @@ class Player {
     if (this.cursors.up.isDown && this.jumpTimer <= 0 && this.doublejump === true  && this.animTimers.jump <= 0) {
       this.sprite.body.setVelocityY(-330);
       this.doublejump = false;
+      this.jumpsound.play();
     }
 
     if (this.space.isDown && !this.haveFired) {
