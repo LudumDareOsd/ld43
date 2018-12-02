@@ -6,7 +6,7 @@ class BulletManager {
   private collisionbox;
   private sceneRef;
 
-  constructor(private scene: Phaser.Scene, private texture: string, maxSize: number, cd?: number, collisionbox?: { x: number, y: number, width: number, height: number }, private onFire?: () => void) {
+  constructor(private scene: Phaser.Scene, private texture: string, maxSize: number, cd?: number, collisionbox?: { x: number, y: number, width: number, height: number }, private onFire?: (context: any) => void, private context?: any) {
     this.bullets = (scene.physics.add.group as any)({
       maxSize: maxSize,
       runChildUpdate: true
@@ -62,7 +62,7 @@ class BulletManager {
         }
 
         if (this.onFire) {
-          this.onFire();
+          this.onFire(this.context);
         }
 
         this.firecd = this.cd;

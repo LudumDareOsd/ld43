@@ -65,6 +65,8 @@ class MapHandler {
     this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.player.knifeManager.bullets, this.sceneRef.player.stopKnife, null);
     this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.enemyHandler.enemyGroup, null, null);
     this.sceneRef.physics.add.collider(this.sceneRef.enemyHandler.enemyGroup, this.sceneRef.player.knifeManager.bullets, this.sceneRef.enemyHandler.onHit, null);
+    this.sceneRef.physics.add.collider(this.sceneRef.player.knifeManager.bullets, this.sceneRef.player.sprite, (player, bullet) => { bullet.destroy() }, null);
+    
 
     for (let enemy of this.sceneRef.enemyHandler.enemys) {
       if (enemy.fireManager) {
