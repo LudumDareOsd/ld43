@@ -10,6 +10,7 @@ class Player {
   private doublejump = true;
   private jumpTimer = 0;
   private sceneLcl: Phaser.Scene;
+  private hp = 5;
 
   pew: any;
   knifehitwall: any;
@@ -32,6 +33,7 @@ class Player {
   }
 
   public update(time: number, delta: number) {
+    this.sceneLcl.physics.world.wrap(this.sprite, 8);
     this.knifeManager.update(delta);
 
     if (Math.abs(this.sprite.body.velocity.x) > 0) {
@@ -94,6 +96,10 @@ class Player {
     knife.setAccelerationY(600);
     //let duns = knife.scene.sound.add('knife_hit', { loop: false });
     //duns.play();
+  }
+
+  public takeDamage() {
+    this.hp--;
   }
 
 }

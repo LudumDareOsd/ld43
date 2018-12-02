@@ -4,14 +4,22 @@ class EnemyHandler {
 
   public enemyGroup: Phaser.GameObjects.Group;
   public enemys = [];
-  public colliderGroup: Phaser.GameObjects.Group;
+  private sceneRef;
 
   constructor(private scene: Phaser.Scene) {
+    this.sceneRef = scene;
   }
 
   public create() {
     this.enemyGroup = this.scene.physics.add.group();
-    this.colliderGroup = this.scene.add.group([], {});
+  }
+
+  public update(time, delta) {
+    this.sceneRef.physics.world.wrap(this.enemys, 0);
+
+    for (let enemy of this.enemys) {
+      enemy.update(time, delta);
+    }
   }
 
   public add(x, y, type: number) {
@@ -20,7 +28,7 @@ class EnemyHandler {
 
     switch (type) {
       case 0: {
-        enemy = new Priest(x, y, this.scene);
+        enemy = new Priest(x, y, this.scene as any);
       }
 
       case 1: {
@@ -30,13 +38,6 @@ class EnemyHandler {
 
     this.enemyGroup.add(enemy.sprite);
     this.enemys.push(enemy);
-    this.colliderGroup.add(enemy.collider)
-  }
-
-  public update(time, delta) {
-    for (let enemy of this.enemys) {
-      enemy.update(time, delta);
-    }
   }
 
   public onTurn(enemyCollider, tile) {
@@ -51,6 +52,20 @@ class EnemyHandler {
     if (enemyToTurn.checkTurn) {
       enemyToTurn.checkTurn();
     }
+  }
+
+  public onHit(enemySprite, knife) {
+    let enemyToHit;
+
+    for (let enemy of enemySprite.scene.enemyHandler.enemys) {
+      if (enemy.sprite === enemySprite) {
+        enemyToHit = enemy;
+      }
+    }
+
+    enemyToHit.takeDamage();
+
+    knife.setAccelerationY(600);
   }
 }
 

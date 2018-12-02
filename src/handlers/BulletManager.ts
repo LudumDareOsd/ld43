@@ -4,8 +4,9 @@ class BulletManager {
   private cd = 100;
   private firecd = 0;
   private collisionbox;
+  private sceneRef;
 
-  constructor(private scene: Phaser.Scene, private texture: string, maxSize: number, cd?: number, collisionbox?: { x: number, y: number, width: number, height: number}) {
+  constructor(private scene: Phaser.Scene, private texture: string, maxSize: number, cd?: number, collisionbox?: { x: number, y: number, width: number, height: number }, private onFire?: () => void) {
     this.bullets = (scene.physics.add.group as any)({
       maxSize: maxSize,
       runChildUpdate: true
@@ -13,14 +14,18 @@ class BulletManager {
 
     if (cd) {
       this.cd = cd;
+      this.firecd = Math.floor((Math.random() * cd));
     }
 
-    if(collisionbox) {
+    if (collisionbox) {
       this.collisionbox = collisionbox;
     }
+
+    this.sceneRef = scene;
   }
 
   public update(delta: number) {
+    this.sceneRef.physics.world.wrap(this.bullets, 0);
     if (this.firecd > 0) {
       this.firecd -= delta;
     }
@@ -51,9 +56,13 @@ class BulletManager {
           bullet.angle = 270;
         }
 
-        if(this.collisionbox) {
+        if (this.collisionbox) {
           bullet.setSize(this.collisionbox.width, this.collisionbox.height, true);
           bullet.setOffset(this.collisionbox.x, this.collisionbox.y);
+        }
+
+        if (this.onFire) {
+          this.onFire();
         }
 
         this.firecd = this.cd;
