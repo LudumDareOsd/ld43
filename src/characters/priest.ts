@@ -75,14 +75,8 @@ class Priest extends Enemy {
   }
 
   private onFire(context: any) {
-<<<<<<< HEAD
-  }
-
-  
-=======
     context.pew.play();
   }  
->>>>>>> ea3f6524c89a76d6df19714a7ab458b7855d5a8a
 }
 
 export default Priest;

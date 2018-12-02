@@ -17,12 +17,9 @@ class EnemyHandler {
   public create() {
     this.sacreficeGroup = this.scene.physics.add.group();
     this.enemyGroup = this.scene.physics.add.group();
-<<<<<<< HEAD
     this.createAnimations();
-=======
     this.enemyCollideLevelGroup = this.scene.physics.add.group();
     this.enemyCollidePlayerGroup = this.scene.physics.add.group();
->>>>>>> ea3f6524c89a76d6df19714a7ab458b7855d5a8a
   }
 
   public update(time, delta) {

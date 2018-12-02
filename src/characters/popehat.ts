@@ -18,6 +18,9 @@ class Popehat extends Enemy {
     this.scene.physics.moveToObject(this.sprite, this.scene.player.sprite.body.center, 48);
   }
 
+  protected onDeath() {
+  }
+
 }
 
 export default Popehat;
