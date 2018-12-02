@@ -36,7 +36,7 @@ class Player {
     scene.anims.create({ key: 'jump', frames: scene.anims.generateFrameNumbers('player', { frames: [7] }), frameRate: 16, repeat: 1});
     scene.anims.create({ key: 'jumpup', frames: scene.anims.generateFrameNumbers('player', { frames: [0] }), frameRate: 0, repeat: 0});
     scene.anims.create({ key: 'jumpdown', frames: scene.anims.generateFrameNumbers('player', { frames: [4] }), frameRate: 0, repeat: 0});
-    this.knifeManager = new BulletManager(this.scene, 'knife', 5, 500, { x: 12, y: 12, width: 10, height: 6 }, this.onFire, this);
+    this.knifeManager = new BulletManager(this.scene, 'knife', 5, true, 500, { x: 12, y: 12, width: 10, height: 6 }, this.onFire, this);
     this.pew = this.sceneLcl.sound.add('player_fire_knife', { loop: false });
     this.pew.volume = 0.4;
     this.jumpsound = this.sceneLcl.sound.add('player_jump', { loop: false, volume: 0.3 });

@@ -11,6 +11,7 @@ class LoadScene extends Phaser.Scene {
     this.load.image('background_gameover', 'assets/gfx/gameover_screen.png');
 
 		this.load.image('knife', '/assets/gfx/knife.png');
+		this.load.image('cross', '/assets/gfx/cross.png');
 
     this.load.image('tilemap01', '/assets/gfx/tilemap01.png');
     this.load.image('background-tiles', '/assets/gfx/background-tiles.png');
