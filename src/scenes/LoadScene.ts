@@ -18,6 +18,7 @@ class LoadScene extends Phaser.Scene {
 
 		(this.load as any).spritesheet('player', '/assets/gfx/player.png', { frameWidth: 32, frameHeight: 32 });
 		(this.load as any).spritesheet('priest', '/assets/gfx/priest.png', { frameWidth: 16, frameHeight: 32 });
+		(this.load as any).spritesheet('popehat', '/assets/gfx/popehat.png', { frameWidth: 16, frameHeight: 32 });
 
     this.load.audio('titleaudio', 'assets/sfx/ambient_deep_bass.mp3', null);
     this.load.audio('gameoveraudio', 'assets/sfx/ambient_violin_scary.mp3', null);

@@ -1,3 +1,4 @@
+import Popehat from "../characters/popehat";
 import Priest from "../characters/priest";
 
 class EnemyHandler {
@@ -24,10 +25,16 @@ class EnemyHandler {
     switch(type) {
       case 0: {
         enemy = new Priest(x, y, this.scene);
+        break;
       }
 
       case 1: {
+        enemy = new Popehat(x, y, this.scene);
+        break;
+      }
 
+      default: {
+        console.log('NO ENEMY WITH TYPE ', type);
       }
     }
 

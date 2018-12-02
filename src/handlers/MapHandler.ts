@@ -32,9 +32,9 @@ class MapHandler {
     this.findObjectsByType('Priest', 0).forEach((element) => {
       this.sceneRef.enemyHandler.add(element.x*2, element.y*2, 0);
     });
-    // this.findObjectsByType('PopeHat', 0).forEach((element) => {
-    //   this.sceneRef.enemyHandler.add(element.x*2, element.y*2, 1);
-    // });
+    this.findObjectsByType('PopeHat', 0).forEach((element) => {
+      this.sceneRef.enemyHandler.add(element.x*2, element.y*2, 1);
+    });
 
 
     this.tileLayer.forEachTile((tile) => {
