@@ -32,6 +32,7 @@ class Player {
   }
 
   public update(time: number, delta: number) {
+    this.sceneLcl.physics.world.wrap(this.sprite, 8);
     this.knifeManager.update(delta);
 
     if (Math.abs(this.sprite.body.velocity.x) > 0) {
