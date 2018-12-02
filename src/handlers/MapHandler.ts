@@ -26,7 +26,7 @@ class MapHandler {
       // this.tileLayer.destroy();
     //   this.map.destroy();
     // }
-    this.map = this.sceneRef.make.tilemap({ key: 'map'+this.currentMap });
+    this.map = this.sceneRef.make.tilemap({ key: 'map' + this.currentMap });
     this.tiles = this.map.addTilesetImage('tilemap01', 'tilemap01');
     this.bgtiles = this.map.addTilesetImage('background-tiles', 'background-tiles');
 
@@ -43,7 +43,7 @@ class MapHandler {
       this.sceneRef.enemyHandler.add(element.x * 2, element.y * 2, 0);
     });
     this.findObjectsByType('PopeHat', 0).forEach((element) => {
-      this.sceneRef.enemyHandler.add(element.x*2, element.y*2, 1);
+      this.sceneRef.enemyHandler.add(element.x * 2, element.y * 2, 1);
     });
 
 
@@ -54,7 +54,7 @@ class MapHandler {
         const x = tile.x * 32; // times 16 times 2q
         const y = tile.y * 32;
         // console.log(x, y);
-        const rect = this.sceneRef.add.zone(x+12, y-2, 10, 10);
+        const rect = this.sceneRef.add.zone(x + 12, y - 2, 10, 10);
         this.deadlyGroup.add(rect);
       }
 
@@ -70,15 +70,18 @@ class MapHandler {
     this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.player.sprite, null, null, null);
     // level collide with player bullets
     this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.player.knifeManager.bullets, this.sceneRef.player.stopKnife, null);
+    this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.enemyHandler.enemyGroup, null, null);
     // player collide with level harmful
     this.sceneRef.physics.add.collider(this.deadlyGroup, this.sceneRef.player.sprite, this.playerDeadlyCollide.bind(this), null, null);
     // enemies collide with level
     this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.enemyHandler.enemyCollideLevelGroup, null, null);
+    this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.enemyHandler.sacreficeGroup, null, null);
     // enemies collides with player bullets
     this.sceneRef.physics.add.collider(this.sceneRef.enemyHandler.enemyGroup, this.sceneRef.player.knifeManager.bullets, this.sceneRef.enemyHandler.onHit, null);
     // enemies collides with player
     this.sceneRef.physics.add.collider(this.sceneRef.enemyHandler.enemyCollidePlayerGroup, this.sceneRef.player.sprite, this.playerDeadlyCollide.bind(this), null, null);
     this.sceneRef.physics.add.collider(this.sceneRef.player.knifeManager.bullets, this.sceneRef.player.sprite, (player, bullet) => { bullet.destroy() }, null);
+    this.sceneRef.physics.add.overlap(this.sceneRef.player.sprite, this.sceneRef.enemyHandler.sacreficeGroup, this.sceneRef.player.sacrefice, null);
 
     for (let enemy of this.sceneRef.enemyHandler.enemys) {
       if (enemy.fireManager) {
