@@ -18,7 +18,6 @@ class GameScene extends Phaser.Scene {
 
   preload() {
     this.music = this.sound.add('playing_audio', { loop: true, volume: 0.4 });
-    this.load.image('cross', '/assets/gfx/cross.png');
   }
 
   create() {
