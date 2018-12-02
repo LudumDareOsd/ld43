@@ -72,7 +72,7 @@ class MapHandler {
     // enemies collides with player
     this.sceneRef.physics.add.collider(this.sceneRef.enemyHandler.enemyCollidePlayerGroup, this.sceneRef.player.sprite, this.playerDeadlyCollide.bind(this), null, null);
     this.sceneRef.physics.add.collider(this.sceneRef.player.knifeManager.bullets, this.sceneRef.player.sprite, (player, bullet) => { bullet.destroy() }, null);
-    this.sceneRef.physics.add.collider(this.sceneRef.player.sprite, this.sceneRef.enemyHandler.sacreficeGroup, null, null);
+    this.sceneRef.physics.add.overlap(this.sceneRef.player.sprite, this.sceneRef.enemyHandler.sacreficeGroup, this.sceneRef.player.sacrefice, null);
 
     for (let enemy of this.sceneRef.enemyHandler.enemys) {
       if (enemy.fireManager) {
