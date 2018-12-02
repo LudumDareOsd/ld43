@@ -115,17 +115,14 @@ class MapHandler {
     }
     this.create();
     this.removeColliders();
+    this.sceneRef.player.knifeManager.clear();
     this.init()
   }
 
   private playerDeadlyCollide(player, object) {
-    this.nextMap();
-    console.log('playerDeadlyCollide', player, object);
-    this.reload();
     player.body.setVelocityX(0);
     player.body.setVelocityY(0);
-    // player.anims.play('hurt');
-    this.sceneRef.player.died();
+    this.sceneRef.player.takeDamage();
   }
 
   // find objects in a Tiled objectlayer of a "type"

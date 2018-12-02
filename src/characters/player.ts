@@ -11,6 +11,7 @@ class Player {
   private jumpTimer = 0;
   private sceneLcl: Phaser.Scene;
   private hp = 5;
+  private dying = false;
   private sacreficeTimer = 0;
   private animTimers = {
     turn: 0,
@@ -59,7 +60,7 @@ class Player {
       this.jumpTimer -= delta;
     }
 
-    if (this.sacreficeTimer <= 0) {
+    if (this.sacreficeTimer <= 0 && !this.dying) {
       this.checkMovements(delta);
     } else {
       this.sprite.body.setVelocityX(0);
@@ -141,12 +142,12 @@ class Player {
   public sacrefice(player, sacrefice) {
     if (player.scene.player.sacreficeTimer <= 0 && !sacrefice.sacreficed) {
       player.anims.play('sacrefice');
-      
+
       let x;
       let y;
 
-      if(sacrefice.flipX) {
-        x =  x = { min: sacrefice.x - 2, max: sacrefice.x - 4 };
+      if (sacrefice.flipX) {
+        x = x = { min: sacrefice.x - 2, max: sacrefice.x - 4 };
       } else {
         x = { min: sacrefice.x + 2, max: sacrefice.x + 4 };
       }
@@ -175,11 +176,23 @@ class Player {
 
   public takeDamage() {
     this.hp--;
-    this.hurtsound.play();
+    // this.hurtsound.play();
+
+    this.died();
   }
 
   public died() {
-    this.diesound.play();
+
+    if (!this.dying) {
+      this.dying = true;
+      this.diesound.play();
+      this.sprite.anims.play('dying');
+      this.scene.time.delayedCall(2000, function () {
+        this.scene.scene.start('GameOverScene');
+      }, [], this);
+    }
+
+
   }
 
   public onFire(context) {
