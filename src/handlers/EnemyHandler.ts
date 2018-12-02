@@ -1,9 +1,12 @@
+import Popehat from "../characters/popehat";
 import Priest from "../characters/priest";
 
 class EnemyHandler {
 
   public sacreficeGroup: Phaser.GameObjects.Group;
   public enemyGroup: Phaser.GameObjects.Group;
+  public enemyCollideLevelGroup: Phaser.GameObjects.Group;
+  public enemyCollidePlayerGroup: Phaser.GameObjects.Group;
   public enemys = [];
   private sceneRef;
 
@@ -14,7 +17,12 @@ class EnemyHandler {
   public create() {
     this.sacreficeGroup = this.scene.physics.add.group();
     this.enemyGroup = this.scene.physics.add.group();
+<<<<<<< HEAD
     this.createAnimations();
+=======
+    this.enemyCollideLevelGroup = this.scene.physics.add.group();
+    this.enemyCollidePlayerGroup = this.scene.physics.add.group();
+>>>>>>> ea3f6524c89a76d6df19714a7ab458b7855d5a8a
   }
 
   public update(time, delta) {
@@ -43,10 +51,18 @@ class EnemyHandler {
     switch (type) {
       case 0: {
         enemy = new Priest(x, y, this.scene as any);
+        this.enemyCollideLevelGroup.add(enemy.sprite);
+        break;
       }
 
       case 1: {
+        enemy = new Popehat(x, y, this.scene as any);
+        this.enemyCollidePlayerGroup.add(enemy.sprite);
+        break;
+      }
 
+      default: {
+        console.log('NO ENEMY WITH TYPE ', type);
       }
     }
 

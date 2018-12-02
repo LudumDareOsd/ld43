@@ -12,9 +12,13 @@ class Priest extends Enemy {
 
   private paralyzed = false;
 
+  pew: any;
+
   constructor(x: number, y: number, scene: GameScene) {
     super(x, y, 'priest', scene);
     this.fireManager = new BulletManager(this.scene, 'cross', 5, false, 3000, { x: 12, y: 12, width: 10, height: 6 }, this.onFire, this);
+    this.pew = this.scene.sound.add('priest_fire', { loop: false, volume: 0.4 });
+    this.pew.volume = 0.4;
   }
 
   public update(time, delta) {
@@ -71,9 +75,14 @@ class Priest extends Enemy {
   }
 
   private onFire(context: any) {
+<<<<<<< HEAD
   }
 
   
+=======
+    context.pew.play();
+  }  
+>>>>>>> ea3f6524c89a76d6df19714a7ab458b7855d5a8a
 }
 
 export default Priest;

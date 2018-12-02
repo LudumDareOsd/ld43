@@ -30,12 +30,21 @@ class Player {
     this.sprite.body.setSize(14, 32);
     this.sprite.setScale(2);
     this.sprite.setDepth(6);
+<<<<<<< HEAD
     scene.anims.create({ key: 'idle', frames: scene.anims.generateFrameNumbers('player', { start: 2, end: 2 }), frameRate: 8, repeat: 1 });
     scene.anims.create({ key: 'run', frames: scene.anims.generateFrameNumbers('player', { start: 0, end: 5 }), frameRate: 8, repeat: 1 });
     scene.anims.create({ key: 'turn', frames: scene.anims.generateFrameNumbers('player', { frames: [6] }), frameRate: 8, repeat: 1 });
     scene.anims.create({ key: 'jump', frames: scene.anims.generateFrameNumbers('player', { frames: [7] }), frameRate: 16, repeat: 1 });
     scene.anims.create({ key: 'jumpup', frames: scene.anims.generateFrameNumbers('player', { frames: [0] }), frameRate: 0, repeat: 0 });
     scene.anims.create({ key: 'jumpdown', frames: scene.anims.generateFrameNumbers('player', { frames: [4] }), frameRate: 0, repeat: 0 });
+=======
+    scene.anims.create({ key: 'idle', frames: scene.anims.generateFrameNumbers('player', { start: 8, end: 9 }), frameRate: 3, repeat: 1});
+    scene.anims.create({ key: 'run', frames: scene.anims.generateFrameNumbers('player', { start: 0, end: 5 }), frameRate: 8, repeat: 1});
+    scene.anims.create({ key: 'turn', frames: scene.anims.generateFrameNumbers('player', { frames: [6] }), frameRate: 8, repeat: 1});
+    scene.anims.create({ key: 'jump', frames: scene.anims.generateFrameNumbers('player', { frames: [7] }), frameRate: 16, repeat: 1});
+    scene.anims.create({ key: 'jumpup', frames: scene.anims.generateFrameNumbers('player', { frames: [0] }), frameRate: 0, repeat: 0});
+    scene.anims.create({ key: 'jumpdown', frames: scene.anims.generateFrameNumbers('player', { frames: [4] }), frameRate: 0, repeat: 0});
+>>>>>>> ea3f6524c89a76d6df19714a7ab458b7855d5a8a
     this.knifeManager = new BulletManager(this.scene, 'knife', 5, true, 500, { x: 12, y: 12, width: 10, height: 6 }, this.onFire, this);
     this.pew = this.sceneLcl.sound.add('player_fire_knife', { loop: false });
     this.pew.volume = 0.4;
