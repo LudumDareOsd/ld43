@@ -63,6 +63,7 @@ class LoadScene extends Phaser.Scene {
     this.anims.create({ key: 'jumpup', frames: this.anims.generateFrameNumbers('player', { frames: [0] }), frameRate: 0, repeat: 0 });
     this.anims.create({ key: 'jumpdown', frames: this.anims.generateFrameNumbers('player', { frames: [4] }), frameRate: 0, repeat: 0 });
     this.anims.create({ key: 'sacrefice', frames: this.anims.generateFrameNumbers('player', { frames: [0, 10, 11] }), frameRate: 8, repeat: 0});
+    this.anims.create({ key: 'dying', frames: this.anims.generateFrameNumbers('player', { frames: [14, 15] }), frameRate: 6, repeat: 0});
     // popehat
     this.anims.create({ key: 'flying', frames: this.anims.generateFrameNumbers('popehat', { start: 0, end: 7 }), frameRate: 10, repeat: -1});
     // priest

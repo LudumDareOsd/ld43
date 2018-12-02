@@ -24,6 +24,12 @@ class BulletManager {
     this.sceneRef = scene;
   }
 
+  public clear() {
+    while(this.bullets.children.entries.length > 0) {
+      this.bullets.children.entries[0].destroy();
+    }
+  }
+
   public update(delta: number) {
     this.sceneRef.physics.world.wrap(this.bullets, 0);
     if (this.firecd > 0) {

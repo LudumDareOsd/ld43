@@ -51,7 +51,7 @@ class UIHandler {
 
   public setDaggers(val: number) {
     this.uiHudGroup.getChildren().forEach((element) => {
-      console.log(element.frame);
+      // console.log(element.frame);
     });
   }
 }
