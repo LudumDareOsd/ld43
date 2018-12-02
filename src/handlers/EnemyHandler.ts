@@ -18,7 +18,7 @@ class EnemyHandler {
 
     let enemy;
 
-    switch(type) {
+    switch (type) {
       case 0: {
         enemy = new Priest(x, y, this.scene);
       }
@@ -34,14 +34,23 @@ class EnemyHandler {
   }
 
   public update(time, delta) {
-    for(let enemy of this.enemys) {
+    for (let enemy of this.enemys) {
       enemy.update(time, delta);
     }
   }
 
-  
-  public onTurn(enemy, tile) {
-    enemy.checkTurn();
+  public onTurn(enemyCollider, tile) {
+    let enemyToTurn;
+
+    for (let enemy of enemyCollider.scene.enemyHandler.enemys) {
+      if (enemy.collider === enemyCollider) {
+        enemyToTurn = enemy;
+      }
+    }
+
+    if (enemyToTurn.checkTurn) {
+      enemyToTurn.checkTurn();
+    }
   }
 }
 

@@ -21,7 +21,7 @@ class Player {
     this.sprite.body.offset.x = 9;
     this.sprite.body.setSize(14, 32);
     this.sprite.setScale(2);
-    this.sprite.setDepth(5);
+    this.sprite.setDepth(6);
     scene.anims.create({ key: 'run', frames: scene.anims.generateFrameNumbers('player', { start: 0, end: 5 }), frameRate: 6, repeat: 1});
     scene.anims.create({ key: 'idle', frames: scene.anims.generateFrameNumbers('player', { start: 0, end: 0 }), frameRate: 6, repeat: 1});
     this.knifeManager = new BulletManager(this.scene, 'knife', 5, 500, { x: 12, y: 12, width: 10, height: 6 });
@@ -91,7 +91,7 @@ class Player {
   public stopKnife(knife, tile) {
     knife.setVelocityX(0);
     knife.setVelocityY(0);
-    knife.setAccelerationY(300);
+    knife.setAccelerationY(600);
     //let duns = knife.scene.sound.add('knife_hit', { loop: false });
     //duns.play();
   }
