@@ -189,7 +189,6 @@ class Player {
       this.diesound.play();
       this.sprite.anims.play('dying');
       this.scene.time.delayedCall(2000, function () {
-        this.sceneLcl.uiHandler.setDaggers(3);
         this.scene.scene.start('GameOverScene');
       }, [], this);
     }
@@ -199,6 +198,16 @@ class Player {
 
   public onFire(context) {
     context.pew.play();
+    context.updateDaggers();
+  }
+
+  public updateDaggers() {
+    this.scene.uiHandler.setDaggers(this.knifeManager.getBulletsLeft());
+  }
+
+  public resetDaggers() {
+    this.knifeManager.clear();
+    this.updateDaggers();
   }
 
 }

@@ -79,6 +79,10 @@ class BulletManager {
 
     return this.firecd;
   }
+
+  public getBulletsLeft() {
+    return this.bullets.maxSize - this.bullets.children.entries.length;
+  }
 }
 
 export default BulletManager;

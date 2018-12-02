@@ -2,7 +2,7 @@ class MapHandler {
 
   private sceneRef;
   private map;
-  private currentMap: number = 1; // Current level
+  public currentMap: number = 1; // Current level
   private maxMap: number = 2;     // Maximum level, when this map is beaten we will see the winscreen
 
   private tiles;
@@ -23,6 +23,7 @@ class MapHandler {
 
   public create() {
     console.log('create map');
+    // this.sceneRef.physics.world.removeAll();
     this.map = this.sceneRef.make.tilemap({ key: 'map' + this.currentMap });
     this.tiles = this.map.addTilesetImage('tilemap01', 'tilemap01');
     this.bgtiles = this.map.addTilesetImage('background-tiles', 'background-tiles');
@@ -77,7 +78,10 @@ class MapHandler {
     this.colliders.push(this.sceneRef.physics.add.collider(this.sceneRef.enemyHandler.enemyGroup, this.sceneRef.player.knifeManager.bullets, this.sceneRef.enemyHandler.onHit, null));
     // enemies collides with player
     this.colliders.push(this.sceneRef.physics.add.collider(this.sceneRef.enemyHandler.enemyCollidePlayerGroup, this.sceneRef.player.sprite, this.playerDeadlyCollide.bind(this), null, null));
-    this.colliders.push(this.sceneRef.physics.add.collider(this.sceneRef.player.knifeManager.bullets, this.sceneRef.player.sprite, (player, bullet) => { bullet.destroy() }, null));
+    this.colliders.push(this.sceneRef.physics.add.collider(this.sceneRef.player.knifeManager.bullets, this.sceneRef.player.sprite, (player, bullet) => {
+      bullet.destroy();
+      this.sceneRef.player.updateDaggers();
+    }, null));
     this.colliders.push(this.sceneRef.physics.add.overlap(this.sceneRef.player.sprite, this.sceneRef.enemyHandler.sacreficeGroup, this.sceneRef.player.sacrefice, null));
 
     for (let enemy of this.sceneRef.enemyHandler.enemys) {
@@ -89,6 +93,7 @@ class MapHandler {
         }, null);
       }
     }
+    this.sceneRef.player.resetDaggers();
     this.reload();
   }
 
@@ -115,7 +120,7 @@ class MapHandler {
     }
     this.create();
     this.removeColliders();
-    this.sceneRef.player.knifeManager.clear();
+    this.sceneRef.player.knifeManager.clear(true);
     this.init()
   }
 
@@ -136,7 +141,6 @@ class MapHandler {
     });
     return result;
   }
-
 
   removeColliders() {
     for (let collider of this.colliders) {

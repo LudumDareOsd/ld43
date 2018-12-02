@@ -120,9 +120,7 @@ class EnemyHandler {
     this.enemys.forEach((enemy) => {
       enemy.sprite.destroy();
     });
-    this.sacreficeGroup.getChildren().forEach((enemy) => {
-      enemy.destroy();
-    });
+    this.sacreficeGroup.clear();
     this.enemys = [];
   }
 
