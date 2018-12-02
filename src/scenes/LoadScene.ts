@@ -21,7 +21,7 @@ class LoadScene extends Phaser.Scene {
     // this.load.tilemapTiledJSON('map3', '/assets/maps/map3.json');
 
 		(this.load as any).spritesheet('player', '/assets/gfx/player.png', { frameWidth: 32, frameHeight: 32 });
-		(this.load as any).spritesheet('priest', '/assets/gfx/priest.png', { frameWidth: 16, frameHeight: 32 });
+		(this.load as any).spritesheet('priest', '/assets/gfx/priest2.png', { frameWidth: 16, frameHeight: 32 });
 		(this.load as any).spritesheet('popehat', '/assets/gfx/popehat.png', { frameWidth: 16, frameHeight: 32 });
 
     this.load.audio('titleaudio', 'assets/sfx/ambient_deep_bass.mp3', null);
@@ -68,6 +68,7 @@ class LoadScene extends Phaser.Scene {
     this.anims.create({ key: 'walk', frames: this.anims.generateFrameNumbers('priest', { start: 0, end: 1 }), frameRate: 4, repeat: 1 });
     this.anims.create({ key: 'crossfire', frames: this.anims.generateFrameNumbers('priest', { start: 2, end: 2 }), frameRate: 4, repeat: 0 });
     this.anims.create({ key: 'sacreficepose', frames: this.anims.generateFrameNumbers('priest', { start: 3, end: 3 }), frameRate: 4, repeat: 0 });
+    this.anims.create({ key: 'sackofrobes', frames: this.anims.generateFrameNumbers('priest', { frames: [4] }), frameRate: 0, repeat: 0 });
   }
 
 	update(time: number, delta: number) {

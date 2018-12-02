@@ -54,7 +54,8 @@ class EnemyHandler {
           }, [], this);
         }, [], this);
 
-        sacrefice.sacrefice.destroy();
+        sacrefice.sacrefice.anims.play('sackofrobes');
+        // sacrefice.sacrefice.destroy();
         sacrefice.manager.destroy();
         remove.push(sacrefice);
       }
