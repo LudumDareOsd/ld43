@@ -6,6 +6,7 @@ class GameScene extends Phaser.Scene {
 
   public map: MapHandler = new MapHandler({ scene: this, yOffset: 80 });
   public player;
+  public emitters;
   private enemyHandler = new EnemyHandler(this);
   private music : any;
 
@@ -20,6 +21,8 @@ class GameScene extends Phaser.Scene {
 	}
 
   create() {
+    this.emitters = this.add.particles('cross');
+    this.emitters.setDepth(1000);
     this.initPlayer();
     this.enemyHandler.create();
     this.map.create();

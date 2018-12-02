@@ -21,14 +21,23 @@ class MapHandler {
   }
 
   public create() {
+    // if(this.tileLayer) {
+      this.tileLayer = null;
+      // this.tileLayer.destroy();
+    //   this.map.destroy();
+    // }
     this.map = this.sceneRef.make.tilemap({ key: 'map'+this.currentMap });
     this.tiles = this.map.addTilesetImage('tilemap01', 'tilemap01');
     this.bgtiles = this.map.addTilesetImage('background-tiles', 'background-tiles');
-    this.reload();
 
     this.deadlyGroup = this.sceneRef.physics.add.staticGroup();
-    this.backgroundLayer = this.map.createStaticLayer('Background', this.bgtiles).setScale(2);
-    this.tileLayer = this.map.createStaticLayer('Tiles', this.tiles).setScale(2);
+    this.backgroundLayer = this.map.createDynamicLayer('Background', this.bgtiles).setScale(2)
+    // this.backgroundLayer.setDepth(0);
+
+    console.log(this.tileLayer);
+    this.tileLayer = this.map.createDynamicLayer('Tiles', this.tiles).setScale(2);
+    console.log(this.tileLayer);
+    // this.tileLayer.setDepth(8);
 
     this.findObjectsByType('Priest', 0).forEach((element) => {
       this.sceneRef.enemyHandler.add(element.x * 2, element.y * 2, 0);
@@ -80,6 +89,7 @@ class MapHandler {
         }, null);
       }
     }
+    this.reload();
   }
 
   // is point on a solid tile
@@ -93,7 +103,6 @@ class MapHandler {
     console.log('setting player to spawnpoint: ', this.spawnpoint);
     this.sceneRef.player.sprite.setX(this.spawnpoint.x);
     this.sceneRef.player.sprite.setY(this.spawnpoint.y);
-    // this.init()
   }
 
   public nextMap() {
@@ -103,7 +112,7 @@ class MapHandler {
       return;
     }
     this.create();
-    this.reload();
+    this.init()
   }
 
   private playerDeadlyCollide(player, object) {
