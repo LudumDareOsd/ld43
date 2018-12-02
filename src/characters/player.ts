@@ -30,7 +30,7 @@ class Player {
     this.sprite.body.setSize(14, 32);
     this.sprite.setScale(2);
     this.sprite.setDepth(6);
-    scene.anims.create({ key: 'idle', frames: scene.anims.generateFrameNumbers('player', { start: 2, end: 2 }), frameRate: 8, repeat: 1});
+    scene.anims.create({ key: 'idle', frames: scene.anims.generateFrameNumbers('player', { start: 8, end: 9 }), frameRate: 3, repeat: 1});
     scene.anims.create({ key: 'run', frames: scene.anims.generateFrameNumbers('player', { start: 0, end: 5 }), frameRate: 8, repeat: 1});
     scene.anims.create({ key: 'turn', frames: scene.anims.generateFrameNumbers('player', { frames: [6] }), frameRate: 8, repeat: 1});
     scene.anims.create({ key: 'jump', frames: scene.anims.generateFrameNumbers('player', { frames: [7] }), frameRate: 16, repeat: 1});

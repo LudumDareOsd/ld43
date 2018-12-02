@@ -2,7 +2,8 @@ class MapHandler {
 
   private sceneRef;
   private map;
-  private currentMap: number = 1;
+  private currentMap: number = 1; // Current level
+  private maxMap: number = 2;     // Maximum level, when this map is beaten we will see the winscreen
 
   private tiles;
   private bgtiles;
@@ -20,7 +21,7 @@ class MapHandler {
   }
 
   public create() {
-    this.map = this.sceneRef.make.tilemap({ key: 'map1' });
+    this.map = this.sceneRef.make.tilemap({ key: 'map'+this.currentMap });
     this.tiles = this.map.addTilesetImage('tilemap01', 'tilemap01');
     this.bgtiles = this.map.addTilesetImage('background-tiles', 'background-tiles');
     this.reload();
@@ -70,7 +71,6 @@ class MapHandler {
     this.sceneRef.physics.add.collider(this.sceneRef.enemyHandler.enemyCollidePlayerGroup, this.sceneRef.player.sprite, this.playerDeadlyCollide.bind(this), null, null);
     this.sceneRef.physics.add.collider(this.sceneRef.player.knifeManager.bullets, this.sceneRef.player.sprite, (player, bullet) => { bullet.destroy() }, null);
 
-
     for (let enemy of this.sceneRef.enemyHandler.enemys) {
       if (enemy.fireManager) {
         this.sceneRef.physics.add.collider(this.tileLayer, enemy.fireManager.bullets, (bullet, tile) => { bullet.destroy() }, null);
@@ -82,6 +82,7 @@ class MapHandler {
     }
   }
 
+  // is point on a solid tile
   public collideAtPoint(x, y) {
     return this.map.getTileAt(Math.floor((x / 32)), Math.floor((y / 32)), 1).index > -1;
   }
@@ -92,14 +93,21 @@ class MapHandler {
     console.log('setting player to spawnpoint: ', this.spawnpoint);
     this.sceneRef.player.sprite.setX(this.spawnpoint.x);
     this.sceneRef.player.sprite.setY(this.spawnpoint.y);
+    // this.init()
   }
 
   public nextMap() {
-
+    this.currentMap++;
+    if (this.currentMap > this.maxMap) {
+      this.sceneRef.scene.start('WinScene');
+      return;
+    }
+    this.create();
+    this.reload();
   }
 
   private playerDeadlyCollide(player, object) {
-    // console.trace('playerDeadlyCollide');
+    this.nextMap();
     console.log('playerDeadlyCollide', player, object);
     this.reload();
     player.body.setVelocityX(0);
