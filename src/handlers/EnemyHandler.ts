@@ -2,6 +2,7 @@ import Priest from "../characters/priest";
 
 class EnemyHandler {
 
+  public sacreficeGroup: Phaser.GameObjects.Group;
   public enemyGroup: Phaser.GameObjects.Group;
   public enemys = [];
   private sceneRef;
@@ -11,7 +12,9 @@ class EnemyHandler {
   }
 
   public create() {
+    this.sacreficeGroup = this.scene.physics.add.group();
     this.enemyGroup = this.scene.physics.add.group();
+    this.createAnimations();
   }
 
   public update(time, delta) {
@@ -20,6 +23,17 @@ class EnemyHandler {
     for (let enemy of this.enemys) {
       enemy.update(time, delta);
     }
+  }
+
+  public addSacrefice(x: number, y: number, right: boolean) {
+    let sprite = this.scene.physics.add.sprite(x, y, 'priest') as any;;
+
+    sprite.setScale(2);
+    sprite.setDepth(5);
+    sprite.flipX = right;
+    sprite.anims.play('sacreficepose', true);
+
+    this.sacreficeGroup.add(sprite);
   }
 
   public add(x, y, type: number) {
@@ -38,6 +52,10 @@ class EnemyHandler {
 
     this.enemyGroup.add(enemy.sprite);
     this.enemys.push(enemy);
+  }
+
+  public remove(enemy) {
+    this.enemys.splice(this.enemys.indexOf(enemy), 1);
   }
 
   public onTurn(enemyCollider, tile) {
@@ -66,6 +84,12 @@ class EnemyHandler {
     enemyToHit.takeDamage();
 
     knife.setAccelerationY(600);
+  }
+
+  private createAnimations() {
+    this.scene.anims.create({ key: 'walk', frames: this.scene.anims.generateFrameNumbers('priest', { start: 0, end: 1 }), frameRate: 4, repeat: 1 });
+    this.scene.anims.create({ key: 'crossfire', frames: this.scene.anims.generateFrameNumbers('priest', { start: 2, end: 2 }), frameRate: 4, repeat: 0 });
+    this.scene.anims.create({ key: 'sacreficepose', frames: this.scene.anims.generateFrameNumbers('priest', { start: 3, end: 3 }), frameRate: 4, repeat: 0 });
   }
 }
 

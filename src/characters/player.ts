@@ -19,9 +19,9 @@ class Player {
   pew: any;
   knifehitwall: any;
   haveFired: boolean = false;
-  jumpsound : any;
-  hurtsound : any;
-  diesound : any;
+  jumpsound: any;
+  hurtsound: any;
+  diesound: any;
 
   constructor(x: number, y: number, private scene: Phaser.Scene, private cursors: any) {
     this.sceneLcl = scene;
@@ -30,12 +30,12 @@ class Player {
     this.sprite.body.setSize(14, 32);
     this.sprite.setScale(2);
     this.sprite.setDepth(6);
-    scene.anims.create({ key: 'idle', frames: scene.anims.generateFrameNumbers('player', { start: 2, end: 2 }), frameRate: 8, repeat: 1});
-    scene.anims.create({ key: 'run', frames: scene.anims.generateFrameNumbers('player', { start: 0, end: 5 }), frameRate: 8, repeat: 1});
-    scene.anims.create({ key: 'turn', frames: scene.anims.generateFrameNumbers('player', { frames: [6] }), frameRate: 8, repeat: 1});
-    scene.anims.create({ key: 'jump', frames: scene.anims.generateFrameNumbers('player', { frames: [7] }), frameRate: 16, repeat: 1});
-    scene.anims.create({ key: 'jumpup', frames: scene.anims.generateFrameNumbers('player', { frames: [0] }), frameRate: 0, repeat: 0});
-    scene.anims.create({ key: 'jumpdown', frames: scene.anims.generateFrameNumbers('player', { frames: [4] }), frameRate: 0, repeat: 0});
+    scene.anims.create({ key: 'idle', frames: scene.anims.generateFrameNumbers('player', { start: 2, end: 2 }), frameRate: 8, repeat: 1 });
+    scene.anims.create({ key: 'run', frames: scene.anims.generateFrameNumbers('player', { start: 0, end: 5 }), frameRate: 8, repeat: 1 });
+    scene.anims.create({ key: 'turn', frames: scene.anims.generateFrameNumbers('player', { frames: [6] }), frameRate: 8, repeat: 1 });
+    scene.anims.create({ key: 'jump', frames: scene.anims.generateFrameNumbers('player', { frames: [7] }), frameRate: 16, repeat: 1 });
+    scene.anims.create({ key: 'jumpup', frames: scene.anims.generateFrameNumbers('player', { frames: [0] }), frameRate: 0, repeat: 0 });
+    scene.anims.create({ key: 'jumpdown', frames: scene.anims.generateFrameNumbers('player', { frames: [4] }), frameRate: 0, repeat: 0 });
     this.knifeManager = new BulletManager(this.scene, 'knife', 5, true, 500, { x: 12, y: 12, width: 10, height: 6 }, this.onFire, this);
     this.pew = this.sceneLcl.sound.add('player_fire_knife', { loop: false });
     this.pew.volume = 0.4;
@@ -91,7 +91,7 @@ class Player {
       this.animTimers.jump = 100;
     }
 
-    if (this.cursors.up.isDown && this.jumpTimer <= 0 && this.doublejump === true  && this.animTimers.jump <= 0) {
+    if (this.cursors.up.isDown && this.jumpTimer <= 0 && this.doublejump === true && this.animTimers.jump <= 0) {
       this.sprite.body.setVelocityY(-330);
       this.doublejump = false;
       this.jumpsound.play();
@@ -100,15 +100,14 @@ class Player {
     if (this.space.isDown && !this.haveFired) {
 
       this.haveFired = true;
-      let nbrBulletsLeft = 0;
 
       if (this.turnedRight) {
-        nbrBulletsLeft = this.knifeManager.fire(this.sprite.x + 10, this.sprite.y - 6, this.turnedRight);
+        this.knifeManager.fire(this.sprite.x + 10, this.sprite.y - 6, this.turnedRight);
       } else {
-        nbrBulletsLeft = this.knifeManager.fire(this.sprite.x - 10, this.sprite.y - 6, this.turnedRight);
+        this.knifeManager.fire(this.sprite.x - 10, this.sprite.y - 6, this.turnedRight);
       }
 
-    } else if(!this.space.isDown){
+    } else if (!this.space.isDown) {
       this.haveFired = false;
     }
 

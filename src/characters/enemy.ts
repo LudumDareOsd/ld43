@@ -14,8 +14,14 @@ abstract class Enemy {
 
   abstract update(time: number, delta: number);
 
+  protected abstract onDeath();
+
   public takeDamage() {
     this.hp--;
+
+    if(this.hp <= 0) {
+      this.onDeath();
+    }
   }
 }
 
