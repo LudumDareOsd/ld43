@@ -10,6 +10,7 @@ import Enemy from './characters/enemy';
 import Priest from './characters/priest';
 import BulletManager from './handlers/BulletManager';
 import EnemyManager from './handlers/EnemyHandler';
+import UIManager from './handlers/UIHandler';
 
 
 const config:GameConfig = {
