@@ -15,6 +15,7 @@ class LoadScene extends Phaser.Scene {
     this.load.image('tilemap01', '/assets/gfx/tilemap01.png');
     this.load.image('background-tiles', '/assets/gfx/background-tiles.png');
     this.load.tilemapTiledJSON('map1', '/assets/maps/map1.json');
+    // this.load.tilemapTiledJSON('map2', '/assets/maps/map2.json');
 
 		(this.load as any).spritesheet('player', '/assets/gfx/player.png', { frameWidth: 32, frameHeight: 32 });
 		(this.load as any).spritesheet('priest', '/assets/gfx/priest.png', { frameWidth: 16, frameHeight: 32 });
@@ -24,7 +25,7 @@ class LoadScene extends Phaser.Scene {
     this.load.audio('gameoveraudio', 'assets/sfx/ambient_violin_scary.mp3', null);
     this.load.audio('winaudio', 'assets/sfx/ambient_deep_bass.mp3', null);
     this.load.audio('knife_hit', 'assets/sfx/knife_hit.mp3', null);
-    this.load.audio('player_death', 'assets/sfx/player_death.mp3', null);
+    this.load.audio('player_death', 'assets/sfx/player_death2.mp3', null);
     this.load.audio('player_fire_knife', 'assets/sfx/player_fire_knife.mp3', null);
     this.load.audio('player_hurt', 'assets/sfx/player_hurt.mp3', null);
     this.load.audio('player_jump', 'assets/sfx/player_jump2.mp3', null);

@@ -10,6 +10,7 @@ class Player {
   private doublejump = true;
   private jumpTimer = 0;
   private sceneLcl: Phaser.Scene;
+  private hp = 5;
   private animTimers = {
     turn: 0,
     jump: 0,
@@ -19,6 +20,8 @@ class Player {
   knifehitwall: any;
   haveFired: boolean = false;
   jumpsound : any;
+  hurtsound : any;
+  diesound : any;
 
   constructor(x: number, y: number, private scene: Phaser.Scene, private cursors: any) {
     this.sceneLcl = scene;
@@ -26,7 +29,7 @@ class Player {
     this.sprite.body.offset.x = 9;
     this.sprite.body.setSize(14, 32);
     this.sprite.setScale(2);
-    this.sprite.setDepth(5);
+    this.sprite.setDepth(6);
     scene.anims.create({ key: 'idle', frames: scene.anims.generateFrameNumbers('player', { start: 2, end: 2 }), frameRate: 8, repeat: 1});
     scene.anims.create({ key: 'run', frames: scene.anims.generateFrameNumbers('player', { start: 0, end: 5 }), frameRate: 8, repeat: 1});
     scene.anims.create({ key: 'turn', frames: scene.anims.generateFrameNumbers('player', { frames: [6] }), frameRate: 8, repeat: 1});
@@ -38,6 +41,8 @@ class Player {
     this.pew.volume = 0.4;
     this.jumpsound = this.sceneLcl.sound.add('player_jump', { loop: false, volume: 0.3 });
     this.jumpsound.volume = 0.3;
+    this.hurtsound = this.sceneLcl.sound.add('player_hurt', { loop: false, volume: 0.8 });
+    this.diesound = this.sceneLcl.sound.add('player_death', { loop: false, volume: 0.8 });
     //this.knifehitwall = this.sceneLcl.sound.add('knife_hit', { loop: false });
     //this.knifehitwall.volume = 0.3;
     this.sprite.on('animationcomplete', (e) => {
@@ -131,9 +136,18 @@ class Player {
   public stopKnife(knife, tile) {
     knife.setVelocityX(0);
     knife.setVelocityY(0);
-    knife.setAccelerationY(300);
+    knife.setAccelerationY(600);
     //let duns = knife.scene.sound.add('knife_hit', { loop: false });
     //duns.play();
+  }
+
+  public takeDamage() {
+    this.hp--;
+    this.hurtsound.play();
+  }
+
+  public died() {
+    this.diesound.play();
   }
 
 }
