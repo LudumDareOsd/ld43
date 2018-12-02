@@ -1,4 +1,5 @@
 import BulletManager from "../handlers/BulletManager";
+import GameScene from "../scenes/GameScene";
 
 class Player {
 
@@ -9,7 +10,7 @@ class Player {
   private turnedRight = true;
   private doublejump = true;
   private jumpTimer = 0;
-  private sceneLcl: Phaser.Scene;
+  private sceneLcl: GameScene;
   private hp = 5;
   private sacreficeTimer = 0;
   private animTimers = {
@@ -24,7 +25,7 @@ class Player {
   hurtsound: any;
   diesound: any;
 
-  constructor(x: number, y: number, private scene: Phaser.Scene, private cursors: any) {
+  constructor(x: number, y: number, private scene: GameScene, private cursors: any) {
     this.sceneLcl = scene;
     this.sprite = this.scene.physics.add.sprite(x, y, 'player');
     this.sprite.body.offset.x = 9;
@@ -141,7 +142,7 @@ class Player {
   public sacrefice(player, sacrefice) {
     if (player.scene.player.sacreficeTimer <= 0 && !sacrefice.sacreficed) {
       player.anims.play('sacrefice');
-      
+
       let x;
       let y;
 
@@ -180,6 +181,7 @@ class Player {
 
   public died() {
     this.diesound.play();
+    this.sceneLcl.uiHandler.setDaggers(3);
   }
 
   public onFire(context) {

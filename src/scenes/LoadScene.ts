@@ -10,6 +10,7 @@ class LoadScene extends Phaser.Scene {
     this.load.image('background_win', 'assets/gfx/win_screen.png');
     this.load.image('background_gameover', 'assets/gfx/gameover_screen.png');
 
+		(this.load as any).spritesheet('ui', '/assets/gfx/ui.png', { frameWidth: 16, frameHeight: 32 });
 		this.load.image('knife', '/assets/gfx/knife.png');
     this.load.image('cross', '/assets/gfx/cross.png');
     this.load.image('blood', 'assets/gfx/blood.png');
