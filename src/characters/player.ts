@@ -1,4 +1,5 @@
 import BulletManager from "../handlers/BulletManager";
+import GameScene from "../scenes/GameScene";
 
 class Player {
 
@@ -9,7 +10,7 @@ class Player {
   private turnedRight = true;
   private doublejump = true;
   private jumpTimer = 0;
-  private sceneLcl: Phaser.Scene;
+  private sceneLcl: GameScene;
   private hp = 5;
   private dying = false;
   private sacreficeTimer = 0;
@@ -25,7 +26,7 @@ class Player {
   hurtsound: any;
   diesound: any;
 
-  constructor(x: number, y: number, private scene: Phaser.Scene, private cursors: any) {
+  constructor(x: number, y: number, private scene: GameScene, private cursors: any) {
     this.sceneLcl = scene;
     this.sprite = this.scene.physics.add.sprite(x, y, 'player');
     this.sprite.body.offset.x = 9;
@@ -188,6 +189,7 @@ class Player {
       this.diesound.play();
       this.sprite.anims.play('dying');
       this.scene.time.delayedCall(2000, function () {
+        this.sceneLcl.uiHandler.setDaggers(3);
         this.scene.scene.start('GameOverScene');
       }, [], this);
     }
