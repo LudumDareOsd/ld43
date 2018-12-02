@@ -29,14 +29,44 @@ class EnemyHandler {
       enemy.update(time, delta);
     }
 
-    for(let sacrefice of this.sacrefices) {
+    const remove = [];
+    for (let sacrefice of this.sacrefices) {
       sacrefice.timer -= delta;
 
-      if(sacrefice.timer <= 0) {
+      if (sacrefice.timer <= 0) {
+        let bloodManager = this.scene.add.particles('blood') as any;
+        bloodManager.setDepth(20);
+        let emitter = bloodManager.createEmitter({
+          x: { min: sacrefice.sacrefice.x - 10, max: sacrefice.sacrefice.x + 10 },
+          y: { min: sacrefice.sacrefice.y - 15, max: sacrefice.sacrefice.y + 25 },
+          quantity: 50,
+          scale: { start: 3, end: 1 },
+          angle: { min: 240, max: 300 },
+          speed: 150,
+          gravityY: 200,
+          lifespan: { min: 1000, max: 1200 }
+        });
+
+        this.scene.time.delayedCall(500, function () {
+          emitter.on = false;
+          this.scene.time.delayedCall(1000, function () {
+            bloodManager.destroy();
+          }, [], this);
+        }, [], this);
+
         sacrefice.sacrefice.destroy();
         sacrefice.manager.destroy();
+        remove.push(sacrefice);
       }
-    }    
+    }
+
+    for (let rem of remove) {
+      const index = this.sacrefices.indexOf(rem);
+
+      if (index != -1) {
+        this.sacrefices.splice(index, 1);
+      }
+    }
   }
 
   public addSacrefice(x: number, y: number, right: boolean) {
