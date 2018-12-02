@@ -1,6 +1,9 @@
 class WinScene extends Phaser.Scene {
 
 	private music : any;
+	private winaudio : any;
+
+	private space : any;
 
 	constructor() {
 		super({
@@ -10,13 +13,20 @@ class WinScene extends Phaser.Scene {
 
 	preload() {
 		this.music = this.sound.add('winaudio', { loop: true });
+		this.winaudio = this.sound.add('win_voice', { loop: false });
 	}
 
 	create() {
 		this.add.image(0, 0, 'background_win').setOrigin(0, 0);
-		this.music.play('', 0, 1, true);
+		this.winaudio.on('ended', function (sound) {
+			this.music.play('', 0, 1, true);
+        }, this);
 
-		this.add.zone(400, 200, 568, 63).setName('StartGame').setInteractive();
+		this.winaudio.play('', 0, 1, true);
+
+		this.add.zone(0, 0, 960, 720).setName('StartGame').setInteractive();
+
+		this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
 		this.input.on('gameobjectdown', (pointer, gameObject) => {
             if(gameObject.name == 'StartGame') {
@@ -36,7 +46,10 @@ class WinScene extends Phaser.Scene {
 	}
 
 	update(time: number, delta:number) {
-
+		if (this.space.isDown) {
+			this.music.stop();
+			this.scene.start('GameScene');
+		}
 	}
 }
 

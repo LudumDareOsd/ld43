@@ -35,6 +35,10 @@ class LoadScene extends Phaser.Scene {
     this.load.audio('portal_use', 'assets/sfx/portal_use.mp3', null);
     this.load.audio('priest_death', 'assets/sfx/priest_death.mp3', null);
     this.load.audio('priest_fire', 'assets/sfx/priest_fire.mp3', null);
+    this.load.audio('gameover_voice', 'assets/sfx/gameover.mp3', null);
+    this.load.audio('player_laugh', 'assets/sfx/player_laugh.mp3', null);
+    this.load.audio('priest_chant', 'assets/sfx/priest_chant.mp3', null);
+    this.load.audio('win_voice', 'assets/sfx/win.mp3', null);
   }
 
 	update(time: number, delta: number) {
