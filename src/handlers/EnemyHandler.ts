@@ -36,6 +36,7 @@ class EnemyHandler {
       if (sacrefice.timer <= 0) {
         let bloodManager = this.scene.add.particles('blood') as any;
         bloodManager.setDepth(20);
+        this.scene.sound.add('priestexplosion', { loop: false, volume: 0.4 }).play();
         let emitter = bloodManager.createEmitter({
           x: { min: sacrefice.sacrefice.x - 10, max: sacrefice.sacrefice.x + 10 },
           y: { min: sacrefice.sacrefice.y - 15, max: sacrefice.sacrefice.y + 25 },
