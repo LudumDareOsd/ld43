@@ -16,7 +16,7 @@ class GameScene extends Phaser.Scene {
   }
 
   preload() {
-		this.music = this.sound.add('playing_audio', { loop: true, volume: 0.5 });
+		this.music = this.sound.add('playing_audio', { loop: true, volume: 0.4 });
 	}
 
   create() {
@@ -24,7 +24,7 @@ class GameScene extends Phaser.Scene {
     this.enemyHandler.create();
     this.map.create();
     this.initPhysics();
-    this.music.volume = 0.5;
+    this.music.volume = 0.4;
     this.music.play('', 0, 1, true);
   }
 

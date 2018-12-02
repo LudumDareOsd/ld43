@@ -85,6 +85,7 @@ class MapHandler {
     player.body.setVelocityX(0);
     player.body.setVelocityY(0);
     // player.anims.play('hurt');
+    this.sceneRef.player.died();
   }
 
   // find objects in a Tiled objectlayer of a "type"

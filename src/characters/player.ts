@@ -15,6 +15,8 @@ class Player {
   knifehitwall: any;
   haveFired: boolean = false;
   jumpsound : any;
+  hurtsound : any;
+  diesound : any;
 
   constructor(x: number, y: number, private scene: Phaser.Scene, private cursors: any) {
     this.sceneLcl = scene;
@@ -30,6 +32,8 @@ class Player {
     this.pew.volume = 0.4;
     this.jumpsound = this.sceneLcl.sound.add('player_jump', { loop: false, volume: 0.3 });
     this.jumpsound.volume = 0.3;
+    this.hurtsound = this.sceneLcl.sound.add('player_hurt', { loop: false, volume: 0.8 });
+    this.diesound = this.sceneLcl.sound.add('player_death', { loop: false, volume: 0.8 });
     //this.knifehitwall = this.sceneLcl.sound.add('knife_hit', { loop: false });
     //this.knifehitwall.volume = 0.3;
   }
@@ -100,6 +104,14 @@ class Player {
     knife.setAccelerationY(300);
     //let duns = knife.scene.sound.add('knife_hit', { loop: false });
     //duns.play();
+  }
+
+  public hurt() {
+    this.hurtsound.play();
+  }
+
+  public died() {
+    this.diesound.play();
   }
 
 }
