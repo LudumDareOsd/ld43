@@ -4,6 +4,7 @@ class BulletManager {
   private cd = 100;
   private firecd = 0;
   private collisionbox;
+  private sceneRef;
 
   constructor(private scene: Phaser.Scene, private texture: string, maxSize: number, cd?: number, collisionbox?: { x: number, y: number, width: number, height: number}) {
     this.bullets = (scene.physics.add.group as any)({
@@ -18,9 +19,12 @@ class BulletManager {
     if(collisionbox) {
       this.collisionbox = collisionbox;
     }
+
+    this.sceneRef = scene;
   }
 
   public update(delta: number) {
+    this.sceneRef.physics.world.wrap(this.bullets, 0);
     if (this.firecd > 0) {
       this.firecd -= delta;
     }

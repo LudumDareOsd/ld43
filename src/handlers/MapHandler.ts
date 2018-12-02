@@ -32,17 +32,16 @@ class MapHandler {
     this.findObjectsByType('Priest', 0).forEach((element) => {
       this.sceneRef.enemyHandler.add(element.x*2, element.y*2, 0);
     });
-    this.findObjectsByType('PopeHat', 0).forEach((element) => {
-      // this.sceneRef.enemyHandler.add(element.x, element.y, 1);
-    });
+    // this.findObjectsByType('PopeHat', 0).forEach((element) => {
+    //   this.sceneRef.enemyHandler.add(element.x*2, element.y*2, 1);
+    // });
 
 
     this.tileLayer.forEachTile((tile) => {
       if (tile.index === 66) {
-        // console.log(tile);
         // const x = tile.getCenterX();
         // const y = tile.getCenterY();
-        const x = tile.x * 32;
+        const x = tile.x * 32; // times 16 times 2q
         const y = tile.y * 32;
         // console.log(x, y);
         const rect = this.sceneRef.add.zone(x+6, y-2, 20, 10);
@@ -56,6 +55,10 @@ class MapHandler {
 
   }
 
+  collideAtPoint(x,y) {
+    return this.map.getTileAt(Math.floor((x/32)), Math.floor((y/32)), 1).index > -1;
+  }
+
   init() {
     this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.player.sprite, null, null, null);
     this.sceneRef.physics.add.collider(this.deadlyGroup, this.sceneRef.player.sprite, this.playerDeadlyCollide.bind(this), null, null);
@@ -65,7 +68,7 @@ class MapHandler {
 
   reload() {
     const sp = this.findObjectsByType('SpawnPoint', 0)[0];
-    this.spawnpoint.x = sp.x*2; this.spawnpoint.y = sp.y*2;
+    this.spawnpoint.x = sp.x*2; this.spawnpoint.y = sp.y*2; // map is saved in 1x scale
     console.log('setting player to spawnpoint: ', this.spawnpoint);
     this.sceneRef.player.sprite.setX(this.spawnpoint.x);
     this.sceneRef.player.sprite.setY(this.spawnpoint.y);
