@@ -11,7 +11,8 @@ class LoadScene extends Phaser.Scene {
     this.load.image('background_gameover', 'assets/gfx/gameover_screen.png');
 
 		this.load.image('knife', '/assets/gfx/knife.png');
-		this.load.image('cross', '/assets/gfx/cross.png');
+    this.load.image('cross', '/assets/gfx/cross.png');
+    this.load.image('blood', 'assets/gfx/blood.png');
 
     this.load.image('tilemap01', '/assets/gfx/tilemap01.png');
     this.load.image('background-tiles', '/assets/gfx/background-tiles.png');
@@ -44,6 +45,29 @@ class LoadScene extends Phaser.Scene {
     this.load.audio('priest_chant', 'assets/sfx/priest_chant.mp3', null);
     this.load.audio('win_voice', 'assets/sfx/win.mp3', null);
     this.load.audio('playing_audio', 'assets/sfx/ambient_ghosts.mp3', null);
+  }
+
+  create() {
+    // needs to be in create not in preload
+    this.initAnims();
+  }
+
+  // animations are shared between screens, create them only once
+  private initAnims() {
+    // player
+    this.anims.create({ key: 'idle', frames: this.anims.generateFrameNumbers('player', { start: 8, end: 9 }), frameRate: 3, repeat: 1 });
+    this.anims.create({ key: 'run', frames: this.anims.generateFrameNumbers('player', { start: 0, end: 5 }), frameRate: 8, repeat: 1 });
+    this.anims.create({ key: 'turn', frames: this.anims.generateFrameNumbers('player', { frames: [6] }), frameRate: 8, repeat: 1 });
+    this.anims.create({ key: 'jump', frames: this.anims.generateFrameNumbers('player', { frames: [7] }), frameRate: 16, repeat: 1 });
+    this.anims.create({ key: 'jumpup', frames: this.anims.generateFrameNumbers('player', { frames: [0] }), frameRate: 0, repeat: 0 });
+    this.anims.create({ key: 'jumpdown', frames: this.anims.generateFrameNumbers('player', { frames: [4] }), frameRate: 0, repeat: 0 });
+    this.anims.create({ key: 'sacrefice', frames: this.anims.generateFrameNumbers('player', { frames: [0, 10, 11] }), frameRate: 8, repeat: 0});
+    // popehat
+    this.anims.create({ key: 'flying', frames: this.anims.generateFrameNumbers('popehat', { start: 0, end: 7 }), frameRate: 10, repeat: -1});
+    // priest
+    this.anims.create({ key: 'walk', frames: this.anims.generateFrameNumbers('priest', { start: 0, end: 1 }), frameRate: 4, repeat: 1 });
+    this.anims.create({ key: 'crossfire', frames: this.anims.generateFrameNumbers('priest', { start: 2, end: 2 }), frameRate: 4, repeat: 0 });
+    this.anims.create({ key: 'sacreficepose', frames: this.anims.generateFrameNumbers('priest', { start: 3, end: 3 }), frameRate: 4, repeat: 0 });
   }
 
 	update(time: number, delta: number) {
