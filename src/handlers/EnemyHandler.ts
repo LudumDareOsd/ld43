@@ -41,7 +41,7 @@ class EnemyHandler {
 
   
   public onTurn(enemy, tile) {
-    console.log(enemy);
+    enemy.checkTurn();
   }
 }
 
