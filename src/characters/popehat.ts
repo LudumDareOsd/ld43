@@ -10,9 +10,8 @@ class Popehat extends Enemy {
   }
 
   public update(time, delta) {
-
-    // console.log('update');
-    // console.log(this.scene);
+    // console.log( this.scene.player.sprite.body.center);
+    this.scene.physics.moveToObject(this.sprite, this.scene.player.sprite.body.center, 48);
   }
 }
 

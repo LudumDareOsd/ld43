@@ -4,6 +4,8 @@ import Priest from "../characters/priest";
 class EnemyHandler {
 
   public enemyGroup: Phaser.GameObjects.Group;
+  public enemyCollideLevelGroup: Phaser.GameObjects.Group;
+  public enemyCollidePlayerGroup: Phaser.GameObjects.Group;
   public enemys = [];
   private sceneRef;
 
@@ -13,6 +15,8 @@ class EnemyHandler {
 
   public create() {
     this.enemyGroup = this.scene.physics.add.group();
+    this.enemyCollideLevelGroup = this.scene.physics.add.group();
+    this.enemyCollidePlayerGroup = this.scene.physics.add.group();
   }
 
   public update(time, delta) {
@@ -30,11 +34,13 @@ class EnemyHandler {
     switch (type) {
       case 0: {
         enemy = new Priest(x, y, this.scene as any);
+        this.enemyCollideLevelGroup.add(enemy.sprite);
         break;
       }
 
       case 1: {
         enemy = new Popehat(x, y, this.scene as any);
+        this.enemyCollidePlayerGroup.add(enemy.sprite);
         break;
       }
 

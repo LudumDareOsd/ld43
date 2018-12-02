@@ -5,7 +5,7 @@ import EnemyHandler from '../handlers/EnemyHandler';
 class GameScene extends Phaser.Scene {
 
   public map: MapHandler = new MapHandler({ scene: this, yOffset: 80 });
-  private player;
+  public player;
   private enemyHandler = new EnemyHandler(this);
   private music : any;
 

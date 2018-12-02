@@ -16,6 +16,9 @@ abstract class Enemy {
 
   public takeDamage() {
     this.hp--;
+    if (this.hp <= 0) {
+      // this.scene.enemyHandler.remove(this);
+    }
   }
 }
 
