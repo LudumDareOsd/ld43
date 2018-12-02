@@ -11,7 +11,7 @@ class Priest extends Enemy {
 
   constructor(x: number, y: number, scene: GameScene) {
     super(x, y, 'priest', scene);
-    this.fireManager = new BulletManager(this.scene, 'knife', 5, 3000, { x: 12, y: 12, width: 10, height: 6 }, this.onFire);
+    this.fireManager = new BulletManager(this.scene, 'cross', 5, false, 3000, { x: 12, y: 12, width: 10, height: 6 }, this.onFire, this);
   }
 
   public update(time, delta) {
@@ -46,7 +46,7 @@ class Priest extends Enemy {
     this.fireManager.fire(this.sprite.x + 10, this.sprite.y - 6, this.turnRight);
   }
 
-  private onFire() {
+  private onFire(context: any) {
     console.log("fire");
     //pewpew
   }  
