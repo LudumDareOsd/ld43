@@ -26,7 +26,7 @@ class GameScene extends Phaser.Scene {
     this.initPlayer();
     this.map.create();
     this.initPhysics();
-    this.music.volume = 0.4;
+    this.music.volume = 0.1;
     this.music.play('', 0, 1, true);
   }
 

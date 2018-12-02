@@ -143,7 +143,7 @@ class Player {
   public sacrefice(player, sacrefice) {
     if (player.scene.player.sacreficeTimer <= 0 && !sacrefice.sacreficed) {
       player.anims.play('sacrefice');
-
+      player.scene.sound.add('knife_hit', { loop: false, volume: 0.4 }).play();
       let x;
       let y;
 
