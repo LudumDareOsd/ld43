@@ -7,14 +7,16 @@ class MapHandler {
   private tiles;
   private bgtiles;
 
+  private layerYOffset: number = 0;
   private tileLayer;
   private deadlyGroup;
   private backgroundLayer;
 
   private spawnpoint = {x: 100, y: 100};
 
-  constructor({ scene: scene }) {
+  constructor({ scene: scene, yOffset }) {
     this.sceneRef = scene;
+    this.layerYOffset = yOffset;
   }
 
   create() {
@@ -24,8 +26,8 @@ class MapHandler {
     this.reload();
 
     this.deadlyGroup = this.sceneRef.physics.add.staticGroup();
-    this.backgroundLayer = this.map.createStaticLayer('Background', this.bgtiles, 0, 0).setScale(2);
-    this.tileLayer = this.map.createStaticLayer('Tiles', this.tiles, 0, 0).setScale(2);
+    this.backgroundLayer = this.map.createStaticLayer('Background', this.bgtiles).setScale(2);
+    this.tileLayer = this.map.createStaticLayer('Tiles', this.tiles).setScale(2);
 
     this.findObjectsByType('Priest', 0).forEach((element) => {
       this.sceneRef.enemyHandler.add(element.x*2, element.y*2, 0);
@@ -43,7 +45,7 @@ class MapHandler {
         const x = tile.x * 32;
         const y = tile.y * 32;
         // console.log(x, y);
-        const rect = this.sceneRef.add.zone(x+3, y-2, 26, 10);
+        const rect = this.sceneRef.add.zone(x+6, y-2, 20, 10);
         this.deadlyGroup.add(rect);
       }
 
