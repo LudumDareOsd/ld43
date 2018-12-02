@@ -11,6 +11,7 @@ class Player {
   private jumpTimer = 0;
   private sceneLcl: Phaser.Scene;
   private hp = 5;
+  private sacreficeTimer = 0;
   private animTimers = {
     turn: 0,
     jump: 0,
@@ -30,7 +31,7 @@ class Player {
     this.sprite.body.setSize(14, 32);
     this.sprite.setScale(2);
     this.sprite.setDepth(6);
-    scene.anims.create({ key: 'sacrefice', frames: scene.anims.generateFrameNumbers('player', { frames: [0, 10, 11] }), frameRate: 4, repeat: 0});
+
     this.knifeManager = new BulletManager(this.scene, 'knife', 5, true, 500, { x: 12, y: 12, width: 10, height: 6 }, this.onFire, this);
     this.pew = this.sceneLcl.sound.add('player_fire_knife', { loop: false });
     this.pew.volume = 0.4;
@@ -53,11 +54,20 @@ class Player {
   public update(time: number, delta: number) {
     this.sceneLcl.physics.world.wrap(this.sprite, 8);
     this.knifeManager.update(delta);
+    this.sacreficeTimer -= delta;
 
     if (this.jumpTimer > 0) {
       this.jumpTimer -= delta;
     }
 
+    if (this.sacreficeTimer <= 0) {
+      this.checkMovements(delta);
+    } else {
+      this.sprite.body.setVelocityX(0);
+    }
+  }
+
+  private checkMovements(delta: number) {
     if (this.cursors.left.isDown) {
       if (this.sprite.flipX === false && this.animTimers.turn <= 0 && this.animTimers.jump <= 0) {
         this.sprite.anims.play('turn', true);
@@ -119,9 +129,6 @@ class Player {
     else if (this.sprite.body.velocity.y > 0 && this.animTimers.jump <= 0) {
       this.sprite.anims.play('jumpdown', true);
     }
-
-
-
   }
 
   public stopKnife(knife, tile) {
@@ -133,8 +140,11 @@ class Player {
   }
 
   public sacrefice(player, sacrefice) {
-    console.log("sacrefice");
-    player.sprite.anims.play('sacrefice');
+    if (player.scene.player.sacreficeTimer <= 0) {
+      player.anims.play('sacrefice');
+    }
+    player.scene.player.sacreficeTimer = 1000;
+    sacrefice.destroy();
   }
 
   public takeDamage() {

@@ -47,6 +47,7 @@ class GameScene extends Phaser.Scene {
     this.anims.create({ key: 'jump', frames: this.anims.generateFrameNumbers('player', { frames: [7] }), frameRate: 16, repeat: 1 });
     this.anims.create({ key: 'jumpup', frames: this.anims.generateFrameNumbers('player', { frames: [0] }), frameRate: 0, repeat: 0 });
     this.anims.create({ key: 'jumpdown', frames: this.anims.generateFrameNumbers('player', { frames: [4] }), frameRate: 0, repeat: 0 });
+    this.anims.create({ key: 'sacrefice', frames: this.anims.generateFrameNumbers('player', { frames: [0, 10, 11] }), frameRate: 4, repeat: 0});
   }
 
   private initPlayer() {
