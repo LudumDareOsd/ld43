@@ -12,6 +12,7 @@ class MapHandler {
   private tileLayer;
   private deadlyGroup;
   private backgroundLayer;
+  private colliders = [];
 
   private spawnpoint = { x: 100, y: 100 };
 
@@ -21,24 +22,21 @@ class MapHandler {
   }
 
   public create() {
-    // if(this.tileLayer) {
-      this.tileLayer = null;
-      // this.tileLayer.destroy();
-    //   this.map.destroy();
-    // }
+    console.log('create map');
     this.map = this.sceneRef.make.tilemap({ key: 'map' + this.currentMap });
     this.tiles = this.map.addTilesetImage('tilemap01', 'tilemap01');
     this.bgtiles = this.map.addTilesetImage('background-tiles', 'background-tiles');
 
     this.deadlyGroup = this.sceneRef.physics.add.staticGroup();
     this.backgroundLayer = this.map.createDynamicLayer('Background', this.bgtiles).setScale(2)
-    // this.backgroundLayer.setDepth(0);
+    this.backgroundLayer.setDepth(0);
 
-    console.log(this.tileLayer);
     this.tileLayer = this.map.createDynamicLayer('Tiles', this.tiles).setScale(2);
-    console.log(this.tileLayer);
-    // this.tileLayer.setDepth(8);
+    // this.tileLayer.setDepth(8); // above bullets or no?
+    this.sceneRef.physics.world.bounds.width = this.tileLayer.width*2;
+    this.sceneRef.physics.world.bounds.height = this.tileLayer.height*2;
 
+    this.sceneRef.enemyHandler.removeAll();
     this.findObjectsByType('Priest', 0).forEach((element) => {
       this.sceneRef.enemyHandler.add(element.x * 2, element.y * 2, 0);
     });
@@ -46,12 +44,11 @@ class MapHandler {
       this.sceneRef.enemyHandler.add(element.x * 2, element.y * 2, 1);
     });
 
-
     this.tileLayer.forEachTile((tile) => {
       if (tile.index === 66) {
         // const x = tile.getCenterX();
         // const y = tile.getCenterY();
-        const x = tile.x * 32; // times 16 times 2q
+        const x = tile.x * 32; // times 16 times 2
         const y = tile.y * 32;
         // console.log(x, y);
         const rect = this.sceneRef.add.zone(x + 12, y - 2, 10, 10);
@@ -66,22 +63,22 @@ class MapHandler {
   }
 
   public init() {
+    console.log('init map');
     // player collide with level
-    this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.player.sprite, null, null, null);
+    this.colliders.push(this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.player.sprite, null, null, null));
     // level collide with player bullets
-    this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.player.knifeManager.bullets, this.sceneRef.player.stopKnife, null);
-    this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.enemyHandler.enemyGroup, null, null);
+    this.colliders.push(this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.player.knifeManager.bullets, this.sceneRef.player.stopKnife, null));
     // player collide with level harmful
-    this.sceneRef.physics.add.collider(this.deadlyGroup, this.sceneRef.player.sprite, this.playerDeadlyCollide.bind(this), null, null);
+    this.colliders.push(this.sceneRef.physics.add.collider(this.deadlyGroup, this.sceneRef.player.sprite, this.playerDeadlyCollide.bind(this), null, null));
     // enemies collide with level
-    this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.enemyHandler.enemyCollideLevelGroup, null, null);
-    this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.enemyHandler.sacreficeGroup, null, null);
+    this.colliders.push(this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.enemyHandler.enemyCollideLevelGroup, null, null));
+    this.colliders.push(this.sceneRef.physics.add.collider(this.tileLayer, this.sceneRef.enemyHandler.sacreficeGroup, null, null));
     // enemies collides with player bullets
-    this.sceneRef.physics.add.collider(this.sceneRef.enemyHandler.enemyGroup, this.sceneRef.player.knifeManager.bullets, this.sceneRef.enemyHandler.onHit, null);
+    this.colliders.push(this.sceneRef.physics.add.collider(this.sceneRef.enemyHandler.enemyGroup, this.sceneRef.player.knifeManager.bullets, this.sceneRef.enemyHandler.onHit, null));
     // enemies collides with player
-    this.sceneRef.physics.add.collider(this.sceneRef.enemyHandler.enemyCollidePlayerGroup, this.sceneRef.player.sprite, this.playerDeadlyCollide.bind(this), null, null);
-    this.sceneRef.physics.add.collider(this.sceneRef.player.knifeManager.bullets, this.sceneRef.player.sprite, (player, bullet) => { bullet.destroy() }, null);
-    this.sceneRef.physics.add.overlap(this.sceneRef.player.sprite, this.sceneRef.enemyHandler.sacreficeGroup, this.sceneRef.player.sacrefice, null);
+    this.colliders.push(this.sceneRef.physics.add.collider(this.sceneRef.enemyHandler.enemyCollidePlayerGroup, this.sceneRef.player.sprite, this.playerDeadlyCollide.bind(this), null, null));
+    this.colliders.push(this.sceneRef.physics.add.collider(this.sceneRef.player.knifeManager.bullets, this.sceneRef.player.sprite, (player, bullet) => { bullet.destroy() }, null));
+    this.colliders.push(this.sceneRef.physics.add.overlap(this.sceneRef.player.sprite, this.sceneRef.enemyHandler.sacreficeGroup, this.sceneRef.player.sacrefice, null));
 
     for (let enemy of this.sceneRef.enemyHandler.enemys) {
       if (enemy.fireManager) {
@@ -97,7 +94,8 @@ class MapHandler {
 
   // is point on a solid tile
   public collideAtPoint(x, y) {
-    return this.map.getTileAt(Math.floor((x / 32)), Math.floor((y / 32)), 1).index > -1;
+    const possibleTile = this.map.getTileAt(Math.floor((x / 32)), Math.floor((y / 32)), 1)
+    return possibleTile ? (possibleTile.index > -1) : true;
   }
 
   public reload() {
@@ -111,10 +109,12 @@ class MapHandler {
   public nextMap() {
     this.currentMap++;
     if (this.currentMap > this.maxMap) {
+      this.currentMap = 1;
       this.sceneRef.scene.start('WinScene');
       return;
     }
     this.create();
+    this.removeColliders();
     this.init()
   }
 
@@ -138,6 +138,13 @@ class MapHandler {
       }
     });
     return result;
+  }
+
+
+  removeColliders() {
+    for (let collider of this.colliders) {
+      this.sceneRef.physics.world.removeCollider(collider);
+    }
   }
 
 }

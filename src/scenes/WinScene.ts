@@ -35,7 +35,7 @@ class WinScene extends Phaser.Scene {
                 this.scene.start('GameScene');
             }
 		});
-		
+
 		this.input.on('pointerover', (event) => {
             document.getElementsByTagName('canvas')[0].style.cursor = "crosshair";
         });

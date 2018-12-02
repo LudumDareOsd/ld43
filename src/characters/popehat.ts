@@ -8,17 +8,18 @@ class Popehat extends Enemy {
 
   constructor(x: number, y: number, scene: GameScene) {
     super(x, y, 'popehat', scene);
-    scene.anims.create({ key: 'flying', frames: scene.anims.generateFrameNumbers('popehat', { start: 0, end: 7 }), frameRate: 10, repeat: -1});
     this.sprite.anims.play('flying', true);
     this.sprite.body.setAllowGravity(false);
     this.flyingsound = this.scene.sound.add('popehat_flying', { loop: true, volume: 0.2 });
     this.flyingsound.play('', 0, 1, true);
-
-    this.emitter = this.scene.emitters.createEmitter({
-      speed: 100,
+    const particles = scene.add.particles('cross');
+    this.emitter = particles.createEmitter({
+      speed: 300,
       scale: { start: 1, end: 0 },
-      blendMode: 'ADD'
+      blendMode: 'ADD',
+      follow: this.sprite
     });
+    // this.emitter.setDepth(1000);
     this.emitter.startFollow(this.sprite);
   }
 

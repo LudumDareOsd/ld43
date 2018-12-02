@@ -30,7 +30,6 @@ class Player {
     this.sprite.body.setSize(14, 32);
     this.sprite.setScale(2);
     this.sprite.setDepth(6);
-    scene.anims.create({ key: 'sacrefice', frames: scene.anims.generateFrameNumbers('player', { frames: [0, 10, 11] }), frameRate: 4, repeat: 0});
     this.knifeManager = new BulletManager(this.scene, 'knife', 5, true, 500, { x: 12, y: 12, width: 10, height: 6 }, this.onFire, this);
     this.pew = this.sceneLcl.sound.add('player_fire_knife', { loop: false });
     this.pew.volume = 0.4;
@@ -51,7 +50,7 @@ class Player {
   }
 
   public update(time: number, delta: number) {
-    this.sceneLcl.physics.world.wrap(this.sprite, 8);
+    this.sceneLcl.physics.world.wrap(this.sprite, 8, 30);
     this.knifeManager.update(delta);
 
     if (this.jumpTimer > 0) {
@@ -120,8 +119,6 @@ class Player {
       this.sprite.anims.play('jumpdown', true);
     }
 
-
-
   }
 
   public stopKnife(knife, tile) {
@@ -134,7 +131,7 @@ class Player {
 
   public sacrefice(player, sacrefice) {
     console.log("sacrefice");
-    player.sprite.anims.play('sacrefice');
+    // this.sprite.anims.play('sacrefice');
   }
 
   public takeDamage() {

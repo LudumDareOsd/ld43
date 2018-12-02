@@ -17,7 +17,6 @@ class EnemyHandler {
   public create() {
     this.sacreficeGroup = this.scene.physics.add.group();
     this.enemyGroup = this.scene.physics.add.group();
-    this.createAnimations();
     this.enemyCollideLevelGroup = this.scene.physics.add.group();
     this.enemyCollidePlayerGroup = this.scene.physics.add.group();
   }
@@ -71,6 +70,15 @@ class EnemyHandler {
     this.enemys.splice(this.enemys.indexOf(enemy), 1);
   }
 
+  public removeAll() {
+    // clear groups aswell or
+    this.enemys.forEach((enemy) => {
+      enemy.sprite.destroy();
+    });
+    console.log(this.enemyGroup);
+    this.enemys = [];
+  }
+
   public onTurn(enemyCollider, tile) {
     let enemyToTurn;
 
@@ -99,11 +107,6 @@ class EnemyHandler {
     knife.setAccelerationY(600);
   }
 
-  private createAnimations() {
-    this.scene.anims.create({ key: 'walk', frames: this.scene.anims.generateFrameNumbers('priest', { start: 0, end: 1 }), frameRate: 4, repeat: 1 });
-    this.scene.anims.create({ key: 'crossfire', frames: this.scene.anims.generateFrameNumbers('priest', { start: 2, end: 2 }), frameRate: 4, repeat: 0 });
-    this.scene.anims.create({ key: 'sacreficepose', frames: this.scene.anims.generateFrameNumbers('priest', { start: 3, end: 3 }), frameRate: 4, repeat: 0 });
-  }
 }
 
 export default EnemyHandler;
