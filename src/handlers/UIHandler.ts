@@ -24,17 +24,18 @@ class UIHandler {
 
   public create() {
     this.uiHudGroup = this.scene.physics.add.staticGroup();
+    this.init();
   }
 
   init() {
-    this.numSoulsToGet = Math.min(this.sceneRef.map.currentMap, 2);
+    // kills needed per map? atleast 2 or levelnumber
+    this.numSoulsToGet = Math.max(this.sceneRef.map.currentMap, 2);
   }
 
   refreshUI() {
     this.uiHudGroup.clear(true);
 
     for(var i = 0; i < this.numBulletsPlayerHas; i++) {
-      console.log(i);
       let hudSword = new UIGadget(i * 30 + 40, 720-40, this.UI_TYPES.DAGGER, this.scene as any);
       this.uiHudGroup.add(hudSword.sprite);
     }
@@ -57,9 +58,7 @@ class UIHandler {
 
   public setDaggers(val: number) {
     this.numBulletsPlayerHas = val;
-    console.log('now displaying ', this.numBulletsPlayerHas);
     this.refreshUI();
-    console.log(this.uiHudGroup.getChildren());
   }
 }
 

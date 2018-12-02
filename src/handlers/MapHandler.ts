@@ -93,6 +93,7 @@ class MapHandler {
         }, null);
       }
     }
+    this.sceneRef.uiHandler.init();
     this.sceneRef.player.resetDaggers();
     this.reload();
   }
@@ -111,6 +112,7 @@ class MapHandler {
     this.sceneRef.player.sprite.setY(this.spawnpoint.y);
   }
 
+  // go to next map, or victory
   public nextMap() {
     this.currentMap++;
     if (this.currentMap > this.maxMap) {

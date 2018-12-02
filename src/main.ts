@@ -20,7 +20,7 @@ const config:GameConfig = {
   height: 720,
   resolution: 1,
   pixelArt: true,
-  backgroundColor: "#333",
+  backgroundColor: "#2a1133",
   physics: {
     default: 'arcade',
     arcade: {
