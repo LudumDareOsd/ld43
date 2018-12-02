@@ -26,6 +26,7 @@ class GameScene extends Phaser.Scene {
     this.initPhysics();
     this.music.volume = 0.4;
     this.music.play('', 0, 1, true);
+    this.initAnims();
   }
 
   update(time: number, delta: number) {
