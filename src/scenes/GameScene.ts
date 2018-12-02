@@ -7,6 +7,7 @@ class GameScene extends Phaser.Scene {
   public map: MapHandler = new MapHandler({ scene: this, yOffset: 80 });
   private player;
   private enemyHandler = new EnemyHandler(this);
+  private music : any;
 
   constructor() {
     super({
@@ -14,11 +15,17 @@ class GameScene extends Phaser.Scene {
     });
   }
 
+  preload() {
+		this.music = this.sound.add('playing_audio', { loop: true, volume: 0.4 });
+	}
+
   create() {
     this.initPlayer();
     this.enemyHandler.create();
     this.map.create();
     this.initPhysics();
+    this.music.volume = 0.4;
+    this.music.play('', 0, 1, true);
   }
 
   update(time: number, delta: number) {

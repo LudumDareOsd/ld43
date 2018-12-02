@@ -44,7 +44,7 @@ class MapHandler {
         const x = tile.x * 32; // times 16 times 2q
         const y = tile.y * 32;
         // console.log(x, y);
-        const rect = this.sceneRef.add.zone(x + 6, y - 2, 20, 10);
+        const rect = this.sceneRef.add.zone(x+12, y-2, 10, 10);
         this.deadlyGroup.add(rect);
       }
 
@@ -96,6 +96,7 @@ class MapHandler {
     player.body.setVelocityX(0);
     player.body.setVelocityY(0);
     // player.anims.play('hurt');
+    this.sceneRef.player.died();
   }
 
   // find objects in a Tiled objectlayer of a "type"

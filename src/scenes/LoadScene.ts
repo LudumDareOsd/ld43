@@ -23,10 +23,10 @@ class LoadScene extends Phaser.Scene {
     this.load.audio('gameoveraudio', 'assets/sfx/ambient_violin_scary.mp3', null);
     this.load.audio('winaudio', 'assets/sfx/ambient_deep_bass.mp3', null);
     this.load.audio('knife_hit', 'assets/sfx/knife_hit.mp3', null);
-    this.load.audio('player_death', 'assets/sfx/player_death.mp3', null);
+    this.load.audio('player_death', 'assets/sfx/player_death2.mp3', null);
     this.load.audio('player_fire_knife', 'assets/sfx/player_fire_knife.mp3', null);
     this.load.audio('player_hurt', 'assets/sfx/player_hurt.mp3', null);
-    this.load.audio('player_jump', 'assets/sfx/player_jump.mp3', null);
+    this.load.audio('player_jump', 'assets/sfx/player_jump2.mp3', null);
     this.load.audio('player_pickup', 'assets/sfx/player_pickup.mp3', null);
     this.load.audio('player_pickup_soul', 'assets/sfx/player_take_soul.mp3', null);
     this.load.audio('popehat_death', 'assets/sfx/popehat_death.mp3', null);
@@ -35,6 +35,11 @@ class LoadScene extends Phaser.Scene {
     this.load.audio('portal_use', 'assets/sfx/portal_use.mp3', null);
     this.load.audio('priest_death', 'assets/sfx/priest_death.mp3', null);
     this.load.audio('priest_fire', 'assets/sfx/priest_fire.mp3', null);
+    this.load.audio('gameover_voice', 'assets/sfx/gameover.mp3', null);
+    this.load.audio('player_laugh', 'assets/sfx/player_laugh.mp3', null);
+    this.load.audio('priest_chant', 'assets/sfx/priest_chant.mp3', null);
+    this.load.audio('win_voice', 'assets/sfx/win.mp3', null);
+    this.load.audio('playing_audio', 'assets/sfx/ambient_ghosts.mp3', null);
   }
 
 	update(time: number, delta: number) {
