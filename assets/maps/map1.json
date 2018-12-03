@@ -34,18 +34,6 @@
          "objects":[
                 {
                  "height":0,
-                 "id":1,
-                 "name":"Priest",
-                 "point":true,
-                 "rotation":0,
-                 "type":"Priest",
-                 "visible":true,
-                 "width":0,
-                 "x":64,
-                 "y":112
-                }, 
-                {
-                 "height":0,
                  "id":3,
                  "name":"SpawnPoint",
                  "point":true,

@@ -91,7 +91,7 @@ class MapHandler {
         }, null);
       }
     }
-    this.sceneRef.uiHandler.init();
+    this.sceneRef.uiHandler.init(this.findObjectsByType('Priest', 0).length);
     this.sceneRef.player.resetDaggers();
     this.reload();
   }
@@ -133,6 +133,9 @@ class MapHandler {
   // find objects in a Tiled objectlayer of a "type"
   public findObjectsByType(type, layer) {
     let result = new Array();
+    if (!this.map.objects[layer]) {
+      return result;
+    }
     this.map.objects[layer].objects.forEach(function (element) {
       if (element.type === type) {
         // element.y -= this.map.tileHeight;
