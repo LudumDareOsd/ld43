@@ -5,6 +5,7 @@ class Player {
 
   public sprite;
   public knifeManager: BulletManager;
+  public switchMap = false;
   private _ = this as any;
   private space = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
   private turnedRight = true;
@@ -61,7 +62,7 @@ class Player {
       this.jumpTimer -= delta;
     }
 
-    if (this.sacreficeTimer <= 0 && !this.dying) {
+    if (this.sacreficeTimer <= 0 && !this.dying && !this.switchMap) {
       this.checkMovements(delta);
     } else {
       this.sprite.body.setVelocityX(0);
@@ -180,6 +181,11 @@ class Player {
     // this.hurtsound.play();
 
     this.died();
+  }
+
+  public switchMapFunc() {
+    this.switchMap = true;
+    this.sprite.anims.play('switchmap');
   }
 
   public died() {
