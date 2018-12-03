@@ -55,6 +55,16 @@ class EnemyHandler {
           }, [], this);
         }, [], this);
 
+        let path = new Phaser.Curves.Path(sacrefice.sacrefice.x, sacrefice.sacrefice.y).circleTo(50).lineTo(380, 660);
+        let soulparticles = this.scene.add.particles('soul_flares') as any;
+        soulparticles.setDepth(20);
+        let soulemitter = soulparticles.createEmitter({
+          frame: { frames: [ 'red', 'green', 'blue' ], cycle: true },
+          scale: { start: 0.5, end: 0 },
+          //blendMode: 'ADD',
+          emitZone: { type: 'edge', source: path, quantity: 48, yoyo: false }
+        });
+
         sacrefice.sacrefice.anims.play('sackofrobes');
         // sacrefice.sacrefice.destroy();
         sacrefice.manager.destroy();
