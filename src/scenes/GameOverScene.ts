@@ -12,7 +12,7 @@ class GameOverScene extends Phaser.Scene {
   }
 
   preload() {
-    this.music = this.sound.add('gameoveraudio', { loop: true });
+    this.music = this.sound.add('gameoveraudio', { loop: false });
     this.gameoveraudio = this.sound.add('gameover_voice', { loop: false });
   }
 
