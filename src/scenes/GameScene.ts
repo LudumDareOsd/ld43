@@ -37,6 +37,11 @@ class GameScene extends Phaser.Scene {
 
   private initPlayer() {
     const cursors = this.input.keyboard.createCursorKeys();
+    cursors.up.isDown = false;
+    cursors.down.isDown = false;
+    cursors.right.isDown = false;
+    cursors.left.isDown = false;
+    
     this.player = new Player(100, 100, this, cursors);
   }
 
