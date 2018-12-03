@@ -19,7 +19,11 @@ class LoadScene extends Phaser.Scene {
     this.load.image('background-tiles', '/assets/gfx/background-tiles.png');
     this.load.tilemapTiledJSON('map1', '/assets/maps/map1.json');
     this.load.tilemapTiledJSON('map2', '/assets/maps/map2.json');
-    // this.load.tilemapTiledJSON('map3', '/assets/maps/map3.json');
+    this.load.tilemapTiledJSON('map3', '/assets/maps/map3.json');
+    this.load.tilemapTiledJSON('map4', '/assets/maps/map4.json');
+    this.load.tilemapTiledJSON('map5', '/assets/maps/map5.json');
+    this.load.tilemapTiledJSON('map6', '/assets/maps/map6.json');
+    // this.load.tilemapTiledJSON('map7', '/assets/maps/map7.json');
     this.load.atlas('soul_flares', 'assets/gfx/flares.png', 'assets/gfx/flares.json');
 
 		(this.load as any).spritesheet('player', '/assets/gfx/player.png', { frameWidth: 32, frameHeight: 32 });

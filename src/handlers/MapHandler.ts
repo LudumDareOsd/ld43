@@ -3,7 +3,7 @@ class MapHandler {
   private sceneRef;
   private map;
   public currentMap: number = 1; // Current level
-  private maxMap: number = 2;     // Maximum level, when this map is beaten we will see the winscreen
+  private maxMap: number = 6;    // Maximum level, when this map is beaten we will see the winscreen
 
   private tiles;
   private bgtiles;
@@ -91,7 +91,7 @@ class MapHandler {
         }, null);
       }
     }
-    
+
     this.sceneRef.uiHandler.init(this.findObjectsByType('Priest', 0).length);
     this.sceneRef.player.resetDaggers();
     this.reload();
@@ -121,7 +121,7 @@ class MapHandler {
     }
     this.create();
     this.removeColliders();
-    
+
     while(this.sceneRef.enemyHandler.robes.length > 0) {
       this.sceneRef.enemyHandler.robes[0].destroy();
       this.sceneRef.enemyHandler.robes.splice(0, 1);
