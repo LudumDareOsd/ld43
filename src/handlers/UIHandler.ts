@@ -8,6 +8,7 @@ class UIHandler {
 
   public numSoulsToGet = 7;
   private currentSouls = 0;
+  private currentHearts = 3;
   private numBulletsPlayerHas = 5;
   private numHealth = 3;
   private grayfilter: any;
@@ -24,6 +25,7 @@ class UIHandler {
 
   public create() {
     this.uiHudGroup = this.scene.physics.add.staticGroup();
+    this.currentHearts = 3;
     this.init();
   }
 
@@ -50,7 +52,7 @@ class UIHandler {
       this.uiHudGroup.add(hudSoul.sprite);
     }
 
-    for(var i = 0; i < this.numHealth; i++) {
+    for(var i = 0; i < this.currentHearts; i++) {
       let hudHeart = new UIGadget(i * 30 + 845, 720-40, this.UI_TYPES.HEART, this.scene as any);
       this.uiHudGroup.add(hudHeart.sprite);
     }
@@ -64,6 +66,17 @@ class UIHandler {
   public setDaggers(val: number) {
     this.numBulletsPlayerHas = val;
     this.refreshUI();
+  }
+
+  public decreaseHearts() {
+    this.currentHearts--;
+    this.refreshUI();
+
+    if(this.currentHearts <= 0) {
+      return true;
+    }
+
+    return false;
   }
 
   // returns true if reached the current limit or increases the soulscounter

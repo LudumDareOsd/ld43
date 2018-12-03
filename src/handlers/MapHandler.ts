@@ -109,6 +109,12 @@ class MapHandler {
     console.log('setting player to spawnpoint: ', this.spawnpoint);
     this.sceneRef.player.sprite.setX(this.spawnpoint.x);
     this.sceneRef.player.sprite.setY(this.spawnpoint.y);
+    this.sceneRef.player.dying = false;
+  }
+
+  public replay() {
+    this.currentMap--;
+    this.nextMap();
   }
 
   // go to next map, or victory
@@ -119,6 +125,21 @@ class MapHandler {
       this.sceneRef.scene.start('WinScene');
       return;
     }
+
+    for(let enemy of this.sceneRef.enemyHandler.enemys) {
+      if(enemy.flyingsound) {
+        enemy.flyingsound.stop();
+      }
+
+      if(enemy.emitter) {
+        enemy.emitter.on = false;
+      }
+    }
+
+    while(this.sceneRef.enemyHandler.sacreficeGroup.children.size > 0) {
+      this.sceneRef.enemyHandler.sacreficeGroup.children.get(0).destroy();
+    }
+
     this.create();
     this.removeColliders();
 
