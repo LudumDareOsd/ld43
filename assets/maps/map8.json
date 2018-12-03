@@ -53,8 +53,8 @@
                  "type":"PopeHat",
                  "visible":true,
                  "width":0,
-                 "x":368,
-                 "y":272
+                 "x":1040,
+                 "y":368
                 }, 
                 {
                  "height":0,
@@ -94,18 +94,6 @@
                 }, 
                 {
                  "height":0,
-                 "id":9,
-                 "name":"PopeHat",
-                 "point":true,
-                 "rotation":0,
-                 "type":"PopeHat",
-                 "visible":true,
-                 "width":0,
-                 "x":48,
-                 "y":224
-                }, 
-                {
-                 "height":0,
                  "id":11,
                  "name":"PopeHat",
                  "point":true,
@@ -114,7 +102,7 @@
                  "visible":true,
                  "width":0,
                  "x":288,
-                 "y":208
+                 "y":256
                 }, 
                 {
                  "height":0,
@@ -125,20 +113,8 @@
                  "type":"PopeHat",
                  "visible":true,
                  "width":0,
-                 "x":448,
-                 "y":80
-                }, 
-                {
-                 "height":0,
-                 "id":13,
-                 "name":"PopeHat",
-                 "point":true,
-                 "rotation":0,
-                 "type":"PopeHat",
-                 "visible":true,
-                 "width":0,
-                 "x":848,
-                 "y":672
+                 "x":576,
+                 "y":96
                 }, 
                 {
                  "height":0,
@@ -178,30 +154,6 @@
                 }, 
                 {
                  "height":0,
-                 "id":17,
-                 "name":"PopeHat",
-                 "point":true,
-                 "rotation":0,
-                 "type":"PopeHat",
-                 "visible":true,
-                 "width":0,
-                 "x":-512,
-                 "y":-240
-                }, 
-                {
-                 "height":0,
-                 "id":20,
-                 "name":"PopeHat",
-                 "point":true,
-                 "rotation":0,
-                 "type":"PopeHat",
-                 "visible":true,
-                 "width":0,
-                 "x":256,
-                 "y":-96
-                }, 
-                {
-                 "height":0,
                  "id":24,
                  "name":"Priest",
                  "point":true,
@@ -211,42 +163,6 @@
                  "width":0,
                  "x":144,
                  "y":288
-                }, 
-                {
-                 "height":0,
-                 "id":25,
-                 "name":"PopeHat",
-                 "point":true,
-                 "rotation":0,
-                 "type":"PopeHat",
-                 "visible":true,
-                 "width":0,
-                 "x":704,
-                 "y":208
-                }, 
-                {
-                 "height":0,
-                 "id":28,
-                 "name":"PopeHat",
-                 "point":true,
-                 "rotation":0,
-                 "type":"PopeHat",
-                 "visible":true,
-                 "width":0,
-                 "x":-112,
-                 "y":368
-                }, 
-                {
-                 "height":0,
-                 "id":31,
-                 "name":"PopeHat",
-                 "point":true,
-                 "rotation":0,
-                 "type":"PopeHat",
-                 "visible":true,
-                 "width":0,
-                 "x":-320,
-                 "y":800
                 }, 
                 {
                  "height":0,
@@ -262,18 +178,6 @@
                 }, 
                 {
                  "height":0,
-                 "id":33,
-                 "name":"PopeHat",
-                 "point":true,
-                 "rotation":0,
-                 "type":"PopeHat",
-                 "visible":true,
-                 "width":0,
-                 "x":496,
-                 "y":-752
-                }, 
-                {
-                 "height":0,
                  "id":34,
                  "name":"PopeHat",
                  "point":true,
@@ -281,8 +185,8 @@
                  "type":"PopeHat",
                  "visible":true,
                  "width":0,
-                 "x":2256,
-                 "y":640
+                 "x":2240,
+                 "y":784
                 }, 
                 {
                  "height":0,
@@ -305,8 +209,8 @@
                  "type":"PopeHat",
                  "visible":true,
                  "width":0,
-                 "x":432,
-                 "y":1952
+                 "x":2224,
+                 "y":2512
                 }, 
                 {
                  "height":0,
