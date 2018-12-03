@@ -9,6 +9,7 @@ class GameScene extends Phaser.Scene {
   public enemyHandler = new EnemyHandler(this);
   public uiHandler = new UIHandler(this);
   public player;
+  public crossParticles;
   private music: any;
   constructor() {
     super({
@@ -21,6 +22,8 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
+    this.crossParticles = this.add.particles('cross') as any;
+    this.crossParticles.setDepth(22);
     this.enemyHandler.create();
     this.uiHandler.create();
     this.initPlayer();

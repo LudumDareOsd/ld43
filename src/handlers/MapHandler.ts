@@ -34,8 +34,8 @@ class MapHandler {
 
     this.tileLayer = this.map.createDynamicLayer('Tiles', this.tiles).setScale(2);
     // this.tileLayer.setDepth(8); // above bullets or no?
-    this.sceneRef.physics.world.bounds.width = this.tileLayer.width*2;
-    this.sceneRef.physics.world.bounds.height = this.tileLayer.height*2;
+    this.sceneRef.physics.world.bounds.width = this.tileLayer.width * 2;
+    this.sceneRef.physics.world.bounds.height = this.tileLayer.height * 2;
 
     this.sceneRef.enemyHandler.removeAll();
     this.findObjectsByType('Priest', 0).forEach((element) => {
@@ -91,6 +91,7 @@ class MapHandler {
         }, null);
       }
     }
+    
     this.sceneRef.uiHandler.init(this.findObjectsByType('Priest', 0).length);
     this.sceneRef.player.resetDaggers();
     this.reload();
@@ -120,6 +121,12 @@ class MapHandler {
     }
     this.create();
     this.removeColliders();
+    
+    while(this.sceneRef.enemyHandler.robes.length > 0) {
+      this.sceneRef.enemyHandler.robes[0].destroy();
+      this.sceneRef.enemyHandler.robes.splice(0, 1);
+    }
+
     this.sceneRef.player.knifeManager.clear(true);
     this.init()
   }

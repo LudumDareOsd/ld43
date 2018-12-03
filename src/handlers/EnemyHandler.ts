@@ -9,6 +9,7 @@ class EnemyHandler {
   public enemyCollidePlayerGroup: Phaser.GameObjects.Group;
   public enemys = [];
   public sacrefices = [];
+  public robes = [];
   private sceneRef;
 
   constructor(private scene: Phaser.Scene) {
@@ -55,31 +56,34 @@ class EnemyHandler {
           }, [], this);
         }, [], this);
 
-        
+        // let path = new Phaser.Curves.Path(sacrefice.sacrefice.x, sacrefice.sacrefice.y).lineTo(380, 660);
+        // let soulparticles = this.scene.add.particles('soul_flares') as any;
+        // soulparticles.setDepth(20);
+        // let soulemitter = soulparticles.createEmitter({
+        //   frame: { frames: [ 'white' ], cycle: true },
+        //   scale: { start: 0.5, end: 0 },
+        //   emitZone: { type: 'edge', source: path, quantity: 48, yoyo: false }
+        // });
 
-        let path = new Phaser.Curves.Path(sacrefice.sacrefice.x, sacrefice.sacrefice.y).circleTo(50).lineTo(380, 660);
-        let soulparticles = this.scene.add.particles('soul_flares') as any;
-        soulparticles.setDepth(20);
-        let soulemitter = soulparticles.createEmitter({
-          frame: { frames: [ 'white' ], cycle: true },
-          scale: { start: 0.3, end: 0 },
-          emitZone: { type: 'edge', source: path, quantity: 48, yoyo: false }
-        });
-
-        this.scene.time.delayedCall(2400, function () {
-          soulemitter.on = false;
-          this.scene.time.delayedCall(1000, function () {
-            soulparticles.destroy();
-          }, [], this);
-        }, [], this);
+        // this.scene.time.delayedCall(2400, function () {
+        //   soulemitter.on = false;
+        //   this.scene.time.delayedCall(1000, function () {
+        //     soulparticles.destroy();
+        //   }, [], this);
+        // }, [], this);
 
         sacrefice.sacrefice.anims.play('sackofrobes');
-        // sacrefice.sacrefice.destroy();
+        this.robes.push(sacrefice.sacrefice);
+        //sacrefice.sacrefice.destroy();
         sacrefice.manager.destroy();
         remove.push(sacrefice);
 
         if (this.sceneRef.uiHandler.increaseSouls()) {
-          this.sceneRef.map.nextMap();
+          this.sceneRef.player.switchMapFunc();
+          this.scene.time.delayedCall(1500, function () {
+            this.sceneRef.player.switchMap = false;
+            this.sceneRef.map.nextMap();
+          }, [], this);
         }
 
       }
@@ -110,6 +114,11 @@ class EnemyHandler {
   }
 
   public add(x, y, type: number) {
+
+    let test = new Popehat(300, 550, this.scene as any);
+    this.enemyCollidePlayerGroup.add(test.sprite);
+    this.enemyGroup.add(test.sprite);
+    this.enemys.push(test);
 
     let enemy;
 

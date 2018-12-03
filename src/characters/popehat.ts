@@ -5,7 +5,6 @@ class Popehat extends Enemy {
 
   private flyingsound : any;
   private emitter: any;
-  private particles: any;
 
   constructor(x: number, y: number, scene: GameScene) {
     super(x, y, 'popehat', scene);
@@ -13,12 +12,9 @@ class Popehat extends Enemy {
     this.sprite.body.setAllowGravity(false);
     this.flyingsound = this.scene.sound.add('popehat_flying', { loop: true, volume: 0.2 });
     this.flyingsound.play('', 0, 1, true);
-    this.particles = scene.add.particles('cross');
-    this.particles.setDepth(22);
-    this.emitter = this.particles.createEmitter({
+    this.emitter = this.scene.crossParticles.createEmitter({
       speed: { min: 30, max: 50 },
       scale: { start: 1, end: 0 },
-      blendMode: 'ADD',
       lifespan: { min: 1000, max: 2000 },
       quantity: 1,
       frequency: 100,
@@ -34,6 +30,31 @@ class Popehat extends Enemy {
   }
 
   protected onDeath() {
+    this.sprite.destroy();
+    let index = this.scene.enemyHandler.enemys.indexOf(this);
+    if(index != -1) {
+      this.scene.enemyHandler.enemys.splice(index, 1);
+    }
+    
+    this.flyingsound.stop();
+    this.scene.sound.add('popehat_death', { loop: false, volume: 0.1 }).play();
+    let emitter = this.scene.crossParticles.createEmitter({
+      x: { min: this.sprite.x - 10, max: this.sprite.x + 10 },
+      y: { min: this.sprite.y - 15, max: this.sprite.y + 25 },
+      quantity: 1,
+      scale: { start: 1, end: 0 },
+      angle: { min:  0, max: 360 },
+      speed: 100,
+      gravityY: 100,
+      lifespan: { min: 1000, max: 1200 }
+    });
+
+    this.scene.time.delayedCall(500, function () {
+      emitter.on = false;
+      this.emitter.on = false;
+    }, [], this);
+
+    this.scene.time
   }
 
 }
