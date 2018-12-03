@@ -77,7 +77,7 @@
                  "type":"Priest",
                  "visible":true,
                  "width":0,
-                 "x":64,
+                 "x":80,
                  "y":144
                 }, 
                 {
@@ -90,7 +90,7 @@
                  "visible":true,
                  "width":0,
                  "x":80,
-                 "y":96
+                 "y":80
                 }, 
                 {
                  "height":0,

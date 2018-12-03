@@ -2,8 +2,8 @@ class MapHandler {
 
   private sceneRef;
   private map;
-  public currentMap: number = 1; // Current level
-  private maxMap: number = 7;    // Maximum level, when this map is beaten we will see the winscreen
+  public currentMap: number = 3; // Current level
+  private maxMap: number = 8;    // Maximum level, when this map is beaten we will see the winscreen
 
   private tiles;
   private bgtiles;

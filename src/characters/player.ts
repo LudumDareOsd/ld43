@@ -201,7 +201,7 @@ class Player {
             enemy.flyingsound.stop();
           }
         }
-        
+
         if (!this.scene.uiHandler.decreaseHearts()) {
           this.scene.map.replay();
         } else {
