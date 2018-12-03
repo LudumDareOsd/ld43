@@ -53,6 +53,7 @@ class GameOverScene extends Phaser.Scene {
   update(time: number, delta: number) {
     if (this.space.isDown) {
       this.music.stop();
+      this.gameoveraudio.stop();
       this.scene.start('GameScene');
     }
   }
