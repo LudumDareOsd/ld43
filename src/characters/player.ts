@@ -205,6 +205,7 @@ class Player {
         if (!this.scene.uiHandler.decreaseHearts()) {
           this.scene.map.replay();
         } else {
+          this.scene.music.stop();
           this.scene.scene.start('GameOverScene');
         }
 
