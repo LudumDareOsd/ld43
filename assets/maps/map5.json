@@ -89,8 +89,8 @@
                  "type":"PopeHat",
                  "visible":true,
                  "width":0,
-                 "x":-240,
-                 "y":288
+                 "x":208,
+                 "y":-240
                 }, 
                 {
                  "height":0,
@@ -101,20 +101,8 @@
                  "type":"PopeHat",
                  "visible":true,
                  "width":0,
-                 "x":688,
-                 "y":320
-                }, 
-                {
-                 "height":0,
-                 "id":9,
-                 "name":"PopeHat",
-                 "point":true,
-                 "rotation":0,
-                 "type":"PopeHat",
-                 "visible":true,
-                 "width":0,
-                 "x":1062,
-                 "y":283
+                 "x":272,
+                 "y":592
                 }, 
                 {
                  "height":0,
