@@ -3,7 +3,7 @@ import GameScene from "../scenes/GameScene";
 
 class Popehat extends Enemy {
 
-  private flyingsound : any;
+  public flyingsound : any;
   private emitter: any;
 
   constructor(x: number, y: number, scene: GameScene) {
