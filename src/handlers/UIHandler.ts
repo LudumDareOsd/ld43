@@ -27,10 +27,9 @@ class UIHandler {
     this.init();
   }
 
-  init() {
-    // kills needed per map? atleast 2 or levelnumber
+  init(stg?:number) {
     this.currentSouls = 0;
-    this.numSoulsToGet = Math.max(Math.floor(this.sceneRef.map.currentMap * 1.5), 3);
+    this.numSoulsToGet = stg ? stg : Math.max(Math.floor(this.sceneRef.map.currentMap * 1.5), 3);
   }
 
   refreshUI() {
