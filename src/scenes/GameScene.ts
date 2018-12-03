@@ -10,7 +10,7 @@ class GameScene extends Phaser.Scene {
   public uiHandler = new UIHandler(this);
   public player;
   public crossParticles;
-  private music: any;
+  public music: any;
   constructor() {
     super({
       key: 'GameScene'
