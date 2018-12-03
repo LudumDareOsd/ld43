@@ -55,12 +55,10 @@ class MapHandler {
         const rect = this.sceneRef.add.zone(x + 12, y - 2, 10, 10);
         this.deadlyGroup.add(rect);
       }
-
     });
 
     this.tileLayer.setCollisionByExclusion([-1]);
     // map.setCollisionBetween(1, 999, true, 'collisionLayer');
-
   }
 
   public init() {

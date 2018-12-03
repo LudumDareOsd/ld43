@@ -10,10 +10,12 @@ class UIHandler {
   private currentSouls = 0;
   private numBulletsPlayerHas = 5;
   private numHealth = 3;
+  private grayfilter: any;
   public UI_TYPES = {
     HEART: 0,
     SKULL: 1,
-    DAGGER: 2,
+    GRAYSKULL: 2,
+    DAGGER: 3,
   };
 
   constructor(private scene: Phaser.Scene) {
@@ -28,7 +30,7 @@ class UIHandler {
   init() {
     // kills needed per map? atleast 2 or levelnumber
     this.currentSouls = 0;
-    this.numSoulsToGet = Math.max(this.sceneRef.map.currentMap, 2);
+    this.numSoulsToGet = Math.max(Math.floor(this.sceneRef.map.currentMap * 1.5), 3);
   }
 
   refreshUI() {
@@ -39,8 +41,13 @@ class UIHandler {
       this.uiHudGroup.add(hudSword.sprite);
     }
 
-    for(var i = 0; i < this.currentSouls; i++) {
-      let hudSoul = new UIGadget(i * 30 + 300, 720-40, this.UI_TYPES.SKULL, this.scene as any);
+    for(var i = 0; i < this.numSoulsToGet; i++) {
+      let hudSoul;
+      if (i < this.currentSouls) {
+        hudSoul = new UIGadget(i * 40 + 300, 720-40, this.UI_TYPES.SKULL, this.scene as any);
+      } else {
+        hudSoul = new UIGadget(i * 40 + 300, 720-40, this.UI_TYPES.GRAYSKULL, this.scene as any);
+      }
       this.uiHudGroup.add(hudSoul.sprite);
     }
 
