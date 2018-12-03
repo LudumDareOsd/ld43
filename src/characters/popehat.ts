@@ -10,6 +10,8 @@ class Popehat extends Enemy {
     super(x, y, 'popehat', scene);
     this.sprite.anims.play('flying', true);
     this.sprite.body.setAllowGravity(false);
+    this.sprite.setSize(12, 20);
+    this.sprite.setOffset(2, 6);
     this.flyingsound = this.scene.sound.add('popehat_flying', { loop: true, volume: 0.2 });
     this.flyingsound.play('', 0, 1, true);
     this.emitter = this.scene.crossParticles.createEmitter({
