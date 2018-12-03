@@ -69,6 +69,11 @@ class EnemyHandler {
         // sacrefice.sacrefice.destroy();
         sacrefice.manager.destroy();
         remove.push(sacrefice);
+
+        if (this.sceneRef.uiHandler.increaseSouls()) {
+          this.sceneRef.map.nextMap();
+        }
+
       }
     }
 

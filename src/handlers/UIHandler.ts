@@ -1,7 +1,4 @@
 import UIGadget from "../characters/uigadget";
-import UISword from "../characters/uisword";
-import UISoul from "../characters/uisoul";
-import UIHeart from "../characters/uiheart";
 
 class UIHandler {
 
@@ -9,7 +6,8 @@ class UIHandler {
   private sceneRef;
   private hud;
 
-  private numSoulsToGet = 7;
+  public numSoulsToGet = 7;
+  private currentSouls = 0;
   private numBulletsPlayerHas = 5;
   private numHealth = 3;
   public UI_TYPES = {
@@ -29,6 +27,7 @@ class UIHandler {
 
   init() {
     // kills needed per map? atleast 2 or levelnumber
+    this.currentSouls = 0;
     this.numSoulsToGet = Math.max(this.sceneRef.map.currentMap, 2);
   }
 
@@ -40,7 +39,7 @@ class UIHandler {
       this.uiHudGroup.add(hudSword.sprite);
     }
 
-    for(var i = 0; i < this.numSoulsToGet; i++) {
+    for(var i = 0; i < this.currentSouls; i++) {
       let hudSoul = new UIGadget(i * 30 + 300, 720-40, this.UI_TYPES.SKULL, this.scene as any);
       this.uiHudGroup.add(hudSoul.sprite);
     }
@@ -59,6 +58,16 @@ class UIHandler {
   public setDaggers(val: number) {
     this.numBulletsPlayerHas = val;
     this.refreshUI();
+  }
+
+  // returns true if reached the current limit or increases the soulscounter
+  public increaseSouls() {
+    this.currentSouls++;
+    this.refreshUI();
+    if (this.currentSouls >= this.numSoulsToGet) {
+      return true;
+    }
+    return false;
   }
 }
 

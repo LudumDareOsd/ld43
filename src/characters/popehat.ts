@@ -5,6 +5,7 @@ class Popehat extends Enemy {
 
   private flyingsound : any;
   private emitter: any;
+  private particles: any;
 
   constructor(x: number, y: number, scene: GameScene) {
     super(x, y, 'popehat', scene);
@@ -12,14 +13,17 @@ class Popehat extends Enemy {
     this.sprite.body.setAllowGravity(false);
     this.flyingsound = this.scene.sound.add('popehat_flying', { loop: true, volume: 0.2 });
     this.flyingsound.play('', 0, 1, true);
-    const particles = scene.add.particles('cross');
-    this.emitter = particles.createEmitter({
-      speed: 300,
+    this.particles = scene.add.particles('cross');
+    this.particles.setDepth(22);
+    this.emitter = this.particles.createEmitter({
+      speed: { min: 30, max: 50 },
       scale: { start: 1, end: 0 },
       blendMode: 'ADD',
-      follow: this.sprite
+      lifespan: { min: 1000, max: 2000 },
+      quantity: 1,
+      frequency: 100,
+      follow: this.sprite,
     });
-    // this.emitter.setDepth(1000);
     this.emitter.startFollow(this.sprite);
   }
 
