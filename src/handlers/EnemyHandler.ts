@@ -115,10 +115,10 @@ class EnemyHandler {
 
   public add(x, y, type: number) {
 
-    let test = new Popehat(300, 550, this.scene as any);
-    this.enemyCollidePlayerGroup.add(test.sprite);
-    this.enemyGroup.add(test.sprite);
-    this.enemys.push(test);
+    // let test = new Popehat(300, 550, this.scene as any);
+    // this.enemyCollidePlayerGroup.add(test.sprite);
+    // this.enemyGroup.add(test.sprite);
+    // this.enemys.push(test);
 
     let enemy;
 

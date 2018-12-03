@@ -44,7 +44,6 @@ class GameScene extends Phaser.Scene {
     cursors.down.isDown = false;
     cursors.right.isDown = false;
     cursors.left.isDown = false;
-    
     this.player = new Player(100, 100, this, cursors);
   }
 
