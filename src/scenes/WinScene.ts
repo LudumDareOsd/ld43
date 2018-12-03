@@ -47,7 +47,8 @@ class WinScene extends Phaser.Scene {
 
 	update(time: number, delta:number) {
 		if (this.space.isDown) {
-			this.music.stop();
+      this.music.stop();
+      this.winaudio.stop();
 			this.scene.start('GameScene');
 		}
 	}

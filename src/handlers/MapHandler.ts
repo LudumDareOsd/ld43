@@ -91,6 +91,7 @@ class MapHandler {
         }, null);
       }
     }
+    
     this.sceneRef.uiHandler.init(this.findObjectsByType('Priest', 0).length);
     this.sceneRef.player.resetDaggers();
     this.reload();
