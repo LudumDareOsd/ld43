@@ -194,7 +194,14 @@ class Player {
       this.dying = true;
       this.diesound.play();
       this.sprite.anims.play('dying');
+      
+
       this.scene.time.delayedCall(2000, function () {
+        for(let enemy of this.scene.enemyHandler.enemys) {
+          if(enemy.flyingsound) {
+            enemy.flyingsound.stop();
+          }
+        }
         this.scene.scene.start('GameOverScene');
       }, [], this);
     }

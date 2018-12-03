@@ -81,6 +81,17 @@ class EnemyHandler {
         if (this.sceneRef.uiHandler.increaseSouls()) {
           this.sceneRef.player.switchMapFunc();
           this.scene.time.delayedCall(1500, function () {
+
+            for(let enemy of this.scene.enemyHandler.enemys) {
+              if(enemy.flyingsound) {
+                enemy.flyingsound.stop();
+              }
+
+              if(enemy.emitter) {
+                enemy.emitter.on = false;
+              }
+            }
+
             this.sceneRef.player.switchMap = false;
             this.sceneRef.map.nextMap();
           }, [], this);
